@@ -3,7 +3,7 @@
 
 # media-studio — STATE
 
-*Generated 2026-09-16 16:46 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
+*Generated 2026-09-17 16:42 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
 
 ## What is open
 
@@ -105,6 +105,7 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 *From git. The full narrative lives in `docs/journal/`; commit subjects are written as search bait, so `git log --grep` is the index.*
 
 ```
+2026-09-16  ffed9fb  state: regenerated after the denoise bookmark
 2026-09-16  e3cfd9d  bookmark: denoise high-ISO Osmo footage with Resolve's NoiseReduction OFX in the Fusion comp, then DJI's LUT on node 1 (blocked: Resolve closed)
 2026-09-16  78c3952  state: regenerated after the 4K renders
 2026-09-16  8e3a69d  verdict: utility-dctls look retired for DJI footage after 4K windows; clip 0004 full 4K conversion with synced WAV in 287 s; DJI's four looks sheet at 4K
@@ -116,16 +117,9 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 2026-09-16  1ee053f  verdict: Osmo clip 0004 ran auto exposure at about ISO 3200 and 1/110-1/200 s, the cause of its low-light look (ISO read from DJI field 3-2-3-1 by pattern)
 2026-09-16  f35c618  verdict: Ryan rejected the approved utility-dctls film look on Osmo clip 0004 ("looks like shit"); approved-look scope narrowed to the iPhone clip
 2026-09-16  a1e0d34  state: regenerated after the second Osmo render and the WAV offset verdict
-2026-09-16  9c80c89  verdict: the Osmo Action 5 Pro WAV leads its MP4 audio by 116-121 ms; clip 0004 rendered with the approved look in 547 s and the WAV delayed 5,556 samples lands at 0.0 ms
 ```
 
-### ⚠ UNPUSHED
-
-**1 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
-
-```
-git push origin master
-```
+*Remote: `https://github.com/blessdog/media-studio.git` — `master` is pushed.*
 
 ### Uncommitted
 
