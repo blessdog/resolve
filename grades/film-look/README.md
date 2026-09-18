@@ -105,6 +105,115 @@ the thin grain (1.60). No verdict from Ryan on that clip. On the second clip (00
 rejected it: "looks like shit" (`knowledge/the-approved-film-look-fails-on-osmo-clip-0004.md`). Do not use Chain C
 as the Osmo default.
 
+## What actually makes an image look cinematic (researched 2026-09-18)
+
+Written because Ryan asked to be taught the landscape, not handed a preset. The order
+is by **how much each layer moves the picture on THIS camera**, which is not the order
+the internet teaches. A film emulation plugin is layer four of five.
+
+### 1. Exposure discipline — the biggest lever, and it is free
+
+MEASURED here on three Osmo clips (`knowledge/osmo-auto-exposure-picks-fast-shutters-and-high-iso-lock-the-shutter.md`,
+`knowledge/nd-and-a-locked-shutter-give-the-osmo-real-4k-detail-on-a-still-frame.md`).
+Sharpness, and how much a 1080p round trip changes the frame (higher = more real 4K detail):
+
+| clip | settings | sharpness | 1080p round trip |
+|---|---|---|---|
+| 0002, 2026-09-18 14:31, still frame | ND, 1/50, ISO 100-800 | **183** | **2.21 codes** |
+| 0001, 2026-09-16, daylight | auto, 1/2000 | 136 | 1.50 |
+| 0006, 2026-09-18 09:14, street ride | auto, 1/500, ISO 800-1600 | 102 | 0.91 |
+| 0014, 2026-09-17, dusk ride | auto, 1/330-1/500, ISO 3200-6400 | 13 | 0.38 |
+
+Fourteen times the detail between the worst and best clip, and **no plugin closes that gap**.
+Noise reduction cannot restore detail that was never recorded. This is why the ND filters
+and the locked shutter were worth more than everything below them combined.
+
+### 2. Optics — what says "action cam" no matter what the colour does
+
+A 1/1.3-inch sensor behind a 155-degree lens has near-infinite depth of field. Everything
+is sharp, so nothing is *chosen*, and the eye reads surveillance rather than cinema. Two fixes,
+both already installed and both scriptable as Fusion OFX (verified 2026-09-18, ids below):
+
+| what | ResolveFX | why it matters |
+|---|---|---|
+| shallow depth of field | `CineFocus` (`apertureEnhanced`, `focusDistance`, `focusExtendRange`) or `DepthMap` + `LensBlur` | separates subject from background, the single strongest non-colour cue |
+| narrower field of view | dewarp in camera, or `LensDistortion` + a crop | the wide look is the action-cam signature |
+| vignette | `Vignette` | pulls the eye to centre; wide lenses need it more |
+| atmosphere | `CinematicHaze` (depth-aware) | depth separation without defocus |
+| chromatic fringing, softened skin | `ChromaticAberration`, `SoftSharpenSkin` | lens character, faces |
+
+All take `ofx.com.blackmagicdesign.resolvefx.<Name>` and are added to a clip's Fusion comp,
+never the colour page (`knowledge/film-look-creator-renders-on-the-mini-through-a-fusion-comp.md`).
+
+### 3. Tone — highlight roll-off is where "video" lives
+
+The one measurable difference between a video image and a film image is what happens
+approaching white. Video clips: everything above the limit becomes one flat value. Film
+compresses, so a bright sky keeps texture. MEASURED on Osmo clip 0014: the Thatcher D-Log M
+conversion, which applies no tone curve, put 24% of a dusk frame at code 255 while DJI's own
+LUT (which has a roll-off built in) held the same frame at 1.5%
+(`knowledge/film-look-creator-on-osmo-clip-0014-blows-the-sky-and-breaks-on-a-dwg-timeline.md`).
+No emulator downstream recovers a sky that is already flat white.
+
+The tools that own this step are called **display rendering transforms (DRTs)**:
+Resolve's own DaVinci tone mapping, ARRI Reveal, **OpenDRT** and the **2499 DRT** (both free
+DCTLs). This is the layer to fix before judging any look.
+
+**Shooting Normal instead of D-Log M moves this decision into the camera**, which bakes its
+own curve and throws the rest away. Normal is right for testing stabilisation; D-Log M at
+these exposure settings is what the finished workflow wants.
+
+### 4. Colour — print emulation and the film "look"
+
+Only now does film emulation earn its place. Three families, in rising cost:
+
+- **A print LUT**: Kodak 2383, Fuji 3513. Resolve ships them; Juan Melara's free set is in
+  this library and measured identical on the grey axis. **They expect Cineon Film Log input**,
+  which is the mistake every forum thread is about (`knowledge/a-print-lut-needs-a-cineon-working-space-in-resolve.md`).
+- **Resolve's own Film Look Creator**: a full ResolveFX with core looks, highlight roll-off,
+  subtractive saturation, split tone, halation, bloom, grain, flicker, gate weave, film gate.
+  Free with Studio, scriptable, 80 s per 20 s of 4K on the MacBook.
+- **A photochemical emulator**: models the negative, the print, and the chemistry between them.
+  The table below.
+
+### 5. Texture — grain, halation, bloom, gate weave
+
+Ryan, 2026-09-18: *"I'm not looking for the film grain because the quality is not already
+grainy."* Correct instinct on clean 4K, and the reason every recipe named `flc-clean-*` sets
+`grainIsEnable` 0. Halation (red bleed around highlights) and a little bloom survive that cut,
+because they are optical, not chemical, and they read as lens rather than film stock.
+
+---
+
+## The emulator market, priced (researched 2026-09-18)
+
+Status: CHECKED = verified here. REPORTED = the vendor or a review says so.
+
+| Tool | Price | Resolve | Grain defeatable | Notes | Status |
+|---|---|---|---|---|---|
+| **Film Look Creator** | included with Studio | Studio | yes (`grainIsEnable` 0) | already proven by script here; the place to start | CHECKED |
+| **Melara / Resolve print LUTs** | free | free + Studio | n/a | installed; need a Cineon working space | CHECKED |
+| **utility-dctls** (Thatcher Freeman) | free, MIT | free + Studio | yes | installed; the parts, not a finished look. REJECTED on DJI footage | CHECKED |
+| **spektrafilm OFX** 0.4.7 | **free** (beta) | free + Studio | yes, texture controls | 35 negative stocks (Vision3, Portra, Ektar, Double-X) + 11 prints, halation, diffusion presets modelling Black Pro-Mist, printer lights, MTF, lens distortion. **Strongest free candidate.** Needs an admin password to install into `/Library/OFX/Plugins` | CHECKED (not installed) |
+| **OpenDRT**, **2499 DRT** | free | free + Studio | n/a | display transforms, layer 3 above, not emulators | REPORTED |
+| **GrainX** | $59 | free + Studio | it *is* grain | scanned Kodak grain, not modelled. Not wanted here | REPORTED |
+| **FilmConvert Nitrate** | $129 | free + Studio | yes | camera-profile driven, simplest workflow; check the Osmo is profiled | REPORTED |
+| **Dehancer Film** | $179 | free + Studio | yes | the popular choice; well regarded halation, DWG/Intermediate and Cineon aware | REPORTED |
+| **EMUL8** (cinem8) | $196 | Studio only | yes | 15 stocks, real-time | REPORTED |
+| **Filmbox** (Video Village) | $199 Looks, $999 Pro | Studio only | yes | 98 stocks across 7 photochemical systems; reviewers call it the most accurate | REPORTED |
+| **ARRI Film Lab** | $25/month | Studio | yes | **requires LogC3/LogC4 input** — a conversion step this camera does not have. Skip | REPORTED |
+
+Sources: [xeremy comparison](https://xere.my/comparisons/best-davinci-film-grain-plugins/),
+[spektrafilm](https://spektrafilm.114c.de/), [Filmbox](https://videovillage.com/filmbox/),
+[Dehancer](https://www.dehancer.com/), [FilmConvert Nitrate](https://www.filmconvert.com/nitrate),
+[ARRI Film Lab on CineD](https://www.cined.com/arri-film-lab-announced-real-time-analog-film-emulation-plugin-for-davinci-resolve-baselight-nuke/),
+[PixelTools free DCTLs](https://pixeltoolspost.com/pages/free-toolkit-for-davinci-resolve).
+
+**The recommendation, in order:** finish Film Look Creator (free, installed, already scripted),
+then install spektrafilm (free, one admin password). Buy nothing until those two have been
+judged on real footage — which is Ryan's own 2026-09-12 instruction, and the reason row 26 of
+`docs/CINEMATIC-PIPELINE-VERIFY.md` exists.
+
 ## Candidates not yet in the library (searched 2026-09-16)
 
 Found after Chain C failed on Osmo clip 0004. Nothing below is installed or rendered yet. Status words:
