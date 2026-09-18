@@ -32,8 +32,10 @@ The 750 s frame, luma darkest 1% / brightest 1% / pixels with a channel at 255:
 | `--timeline dwg`, FLC either recipe | 0 | 255 | 17% and CORRUPT |
 
 So the clipping is upstream of Film Look Creator and independent of the space it is told it receives: the Thatcher
-DCTL puts this sky far above display white, nothing in either chain rolls it off, and DaVinci tone mapping on an
-SDR output did not fold it either (the agent's reading: SDR-to-SDR tone mapping is close to identity). DJI's LUT
+DCTL puts this sky far above display white, nothing in either chain rolls it off, and DaVinci tone mapping on the
+SDR output did not fold it either. Measured on project osmo-0014-dwg: timelineWorkingLuminanceMode 'HDR 1000',
+timelineWorkingLuminance 1000, colorSpaceOutputToneLuminanceMax 100, so the mapping was 1000 to 100 nits and the sky
+still clipped; why is OPEN. DJI's LUT
 has a roll-off built in. The corrupted DWG frames (white blocks of tile size, the shape of a bloom or halation pass
 meeting out-of-range values) are the agent's reading, not measured; the mechanism is OPEN. Renders match their
 stills within 0.8 to 1.8 codes mean, so the renders are what the stills show.
