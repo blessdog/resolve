@@ -8,7 +8,7 @@ verified-on: 2026-09-17
 scope: DJI Osmo Action 5 Pro clip DJI_20260917182112_0014_D (dusk bike ride, 18:21 on 2026-09-17, D-Log M 4K 29.97 at 91 Mbps, auto exposure, the pattern-read field mostly 3200 with 6400 stretches, shutter 1/330 to 1/500) against clip DJI_20260916114233_0001_D (daylight, 1/2000 s, field near 240); frames at 750 and 300 s of 0014 and 60 s of 0001, and the FLC restrained render of 0014 at 750 s
 evidence: jobs/film-look-mini/evidence/2026-09-17-osmo-dji-0014-4k-pixels-1080p-detail-crops.jpg (100% crops, each beside its own 1080p round trip)
 asked-as:
-  - the 4K footage does not look 4K
+  - the 4K Osmo footage does not look 4K, it looks soft and smeared
   - why is the Osmo video soft even though the files are huge
   - is the render losing resolution
   - does the DJI 4K carry real 4K detail
