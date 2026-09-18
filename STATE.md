@@ -3,7 +3,7 @@
 
 # media-studio — STATE
 
-*Generated 2026-09-18 15:04 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
+*Generated 2026-09-18 15:20 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
 
 ## What is open
 
@@ -47,11 +47,12 @@ Every `kind: open` claim in the store. These are PLANS, not specs — `proven: f
 The full index. Query it before choosing any technique — `find-technique.py "<your situation>"` — rather than reading it. Every claim declares the questions that must find it, and `check-retrieval.py` asserts they do.
 
 ```
-KNOWLEDGE — 40 live claims: 40 from this project (/Users/SSDrive/projects/mediaStudio/media-studio/knowledge), 0 universal (~/.claude/knowledge/store)
+KNOWLEDGE — 42 live claims: 42 from this project (/Users/SSDrive/projects/mediaStudio/media-studio/knowledge), 0 universal (~/.claude/knowledge/store)
 Query before choosing any technique:  python3 ~/.claude/knowledge/bin/find-technique.py "<your situation>"
 
 LAWS — absolute, no exceptions
   · hide-the-crystallography-scaffolds: A deposited structure contains parts that exist only so the structure could be
+  · i-kept-tuning-film-look-creator-after-it-had-already-been-rejected: Ryan, 2026-09-18, on three rounds of Film Look Creator variants:
 
 PROCEDURES — the routes that are currently believed
   · film-look-creator-renders-on-the-mini-through-a-fusion-comp answers how-to-apply-film-look-creator-by-script   (sibling: none)
@@ -78,6 +79,7 @@ VERDICTS — measured, and SCOPED; check the scope before reusing
   · resolve-scripting-sets-a-clip-input-only-with-the-split-off Resolve Studio 21.1 on the MacBook, davinciYRGBColorManagedv2, timeline Rec.709 / Linear, 
   · resolve-stoprendering-returns-before-the-render-stops Resolve Studio 21.1.0 on the Mac mini, stopping a Fusion CineFocus render started through 
   · ryan-approved-the-utility-dctls-film-look-with-400-grain iPhone 17 Pro log clip IMG_0006 (Final Cut Camera HEVC, Resolve detected Apple Log 2), 108
+  · spektrafilm-installs-without-admin-but-its-menus-are-invisible-to-scripting spektrafilm OFX 0.4.7 (free, GPL-3.0) on macOS 27, DaVinci Resolve Studio 21.1, driven fro
   · the-approved-film-look-fails-on-osmo-clip-0004 recipe rich-halation-grain-400 (utility-dctls, 400 grains per pixel) after the D-Log M con
   · the-cinematic-levers-ranked-on-the-osmo-exposure-then-optics-then-tone DJI Osmo Action 5 Pro, 4K, clips 0001 / 0006 / 0014 (detail measurements) and clip DJI_202
   · the-mini-renders-the-story-ir-with-ffmpeg-not-resolve straight-cut timelines (track-1 edits only) rendered from a workspace's story.json; the Ma
@@ -114,6 +116,8 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 *From git. The full narrative lives in `docs/journal/`; commit subjects are written as search bait, so `git log --grep` is the index.*
 
 ```
+2026-09-18  98fd3c6  spektrafilm installs with no admin password via OFX_PLUGIN_PATH, but its menus are invisible to scripting; law: when a look is rejected change the TOOL, not the parameter
+2026-09-18  9d9be90  state: regenerated after the cinematic-levers research and the four-look taste on clip 0002
 2026-09-18  fe6085c  research: the cinematic levers ranked for the Osmo (exposure, optics, tone, colour, texture) with the 2026 emulator market priced; Kodak 2383 print holds every highlight and renders in 8 s
 2026-09-18  b6af88a  film-look-mini: grain-free FLC recipes for clean footage, a CineFocus depth-of-field stage, and film_mini.py takes absolute paths (relative clip = silent empty ImportMedia, relative TargetDir = modal render-path dialog)
 2026-09-18  4b86193  state: regenerated after the ND and locked-shutter 4K detail verdict
@@ -124,13 +128,11 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 2026-09-17  772f433  verdict: Osmo dusk clip 0014 is 4K pixels with less than 1080p detail as shot (1080p round trip changes 0.38 codes vs 1.50 on the daylight clip); the render loses nothing
 2026-09-17  a567091  state: regenerated after the Film Look Creator taste on Osmo clip 0014
 2026-09-17  e0fb4e7  bookmark: fold D-Log M highlights ahead of Film Look Creator (sky clips 13-27% vs DJI LUT 1.5%; DWG path corrupts)
-2026-09-17  f68a89a  claim: the DWG project's tone mapping was 1000 to 100 nits and the sky still clipped; mechanism open, not guessed
-2026-09-17  29b2652  evidence: taste sheet relabelled so the broken DWG panels say BROKEN and the sky reference says what it is
 ```
 
 ### ⚠ UNPUSHED
 
-**15 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
+**17 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
 
 ```
 git push origin master
