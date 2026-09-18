@@ -3,7 +3,7 @@
 
 # media-studio — STATE
 
-*Generated 2026-09-17 20:28 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
+*Generated 2026-09-18 09:43 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
 
 ## What is open
 
@@ -47,7 +47,7 @@ Every `kind: open` claim in the store. These are PLANS, not specs — `proven: f
 The full index. Query it before choosing any technique — `find-technique.py "<your situation>"` — rather than reading it. Every claim declares the questions that must find it, and `check-retrieval.py` asserts they do.
 
 ```
-KNOWLEDGE — 36 live claims: 36 from this project (/Users/SSDrive/projects/mediaStudio/media-studio/knowledge), 0 universal (~/.claude/knowledge/store)
+KNOWLEDGE — 38 live claims: 38 from this project (/Users/SSDrive/projects/mediaStudio/media-studio/knowledge), 0 universal (~/.claude/knowledge/store)
 Query before choosing any technique:  python3 ~/.claude/knowledge/bin/find-technique.py "<your situation>"
 
 LAWS — absolute, no exceptions
@@ -66,7 +66,9 @@ VERDICTS — measured, and SCOPED; check the scope before reusing
   · film-look-creator-on-osmo-clip-0014-blows-the-sky-and-breaks-on-a-dwg-timeline DJI Osmo Action 5 Pro clip DJI_20260917182112_0014_D (25 min bike ride at dusk, 4K 29.97 D
   · gpcr-interface-faces-are-90-degrees-apart Class A GPCR heteromers assembled from real coordinates, specifically the A2AR-D2R heterot
   · iphone-camera-app-prores-log-is-apple-log-not-log-2 iPhone 17 Pro, iOS 26.6.2, built-in Camera app with ProRes Log (ProRes 422 HQ 1080p); Reso
+  · osmo-auto-exposure-picks-fast-shutters-and-high-iso-lock-the-shutter DJI Osmo Action 5 Pro on auto exposure, three clips read through the pattern field Dvtm_ac
   · osmo-clip-0004-was-shot-at-about-iso-3200 DJI Osmo Action 5 Pro (firmware field 10.00.16.13), auto exposure, D-Log M, 4K 29.97, clip
+  · osmo-dusk-clip-0014-is-4k-pixels-with-less-than-1080p-detail DJI Osmo Action 5 Pro clip DJI_20260917182112_0014_D (dusk bike ride, 18:21 on 2026-09-17,
   · render-4k-footage-at-4k renders made for Ryan to watch from 4K camera footage (DJI Osmo Action 5 Pro, 3840x2160), 
   · resolve-21-1-installer-needs-14-gb-on-the-startup-disk DaVinci_Resolve_Studio_21.1_Mac.dmg ("Install Resolve 21.1.pkg", 11 GB) on macOS; the Mac 
   · resolve-exportlut-bakes-the-node-grade-not-colour-management Resolve Studio 21.1.0, TimelineItem.ExportLUT(EXPORT_LUT_65PTCUBE) on a clip in a davinciY
@@ -110,6 +112,10 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 *From git. The full narrative lives in `docs/journal/`; commit subjects are written as search bait, so `git log --grep` is the index.*
 
 ```
+2026-09-18  7406b6e  verdict: Osmo auto exposure picks 1/500 at ISO 800-3200 on a sunny street and ISO 12800-25600 in the shed; lock the shutter (clip 0006 Normal 10-bit test)
+2026-09-17  50777d0  claim: retrieval phrasing for the soft-4K Osmo verdict
+2026-09-17  772f433  verdict: Osmo dusk clip 0014 is 4K pixels with less than 1080p detail as shot (1080p round trip changes 0.38 codes vs 1.50 on the daylight clip); the render loses nothing
+2026-09-17  a567091  state: regenerated after the Film Look Creator taste on Osmo clip 0014
 2026-09-17  e0fb4e7  bookmark: fold D-Log M highlights ahead of Film Look Creator (sky clips 13-27% vs DJI LUT 1.5%; DWG path corrupts)
 2026-09-17  f68a89a  claim: the DWG project's tone mapping was 1000 to 100 nits and the sky still clipped; mechanism open, not guessed
 2026-09-17  29b2652  evidence: taste sheet relabelled so the broken DWG panels say BROKEN and the sky reference says what it is
@@ -118,15 +124,11 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 2026-09-17  68bf161  state: regenerated after the Fusion capabilities inventory (no code or claims changed)
 2026-09-16  ffed9fb  state: regenerated after the denoise bookmark
 2026-09-16  e3cfd9d  bookmark: denoise high-ISO Osmo footage with Resolve's NoiseReduction OFX in the Fusion comp, then DJI's LUT on node 1 (blocked: Resolve closed)
-2026-09-16  78c3952  state: regenerated after the 4K renders
-2026-09-16  8e3a69d  verdict: utility-dctls look retired for DJI footage after 4K windows; clip 0004 full 4K conversion with synced WAV in 287 s; DJI's four looks sheet at 4K
-2026-09-16  1d81d9f  verdict: render 4K footage at 4K (Ryan: 'very pixulated... why are you not rendering in 4k?'); 4K timings on the MacBook, conversion 26 s and look 493 s per 30 s
-2026-09-16  8eec86b  film-look-mini: render at the clip's own resolution by default (4K Osmo renders 4K), --render idt renders the camera conversion alone
 ```
 
 ### ⚠ UNPUSHED
 
-**6 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
+**10 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
 
 ```
 git push origin master
