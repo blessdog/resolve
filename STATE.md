@@ -3,7 +3,7 @@
 
 # media-studio — STATE
 
-*Generated 2026-09-18 09:43 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
+*Generated 2026-09-18 14:39 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
 
 ## What is open
 
@@ -47,7 +47,7 @@ Every `kind: open` claim in the store. These are PLANS, not specs — `proven: f
 The full index. Query it before choosing any technique — `find-technique.py "<your situation>"` — rather than reading it. Every claim declares the questions that must find it, and `check-retrieval.py` asserts they do.
 
 ```
-KNOWLEDGE — 38 live claims: 38 from this project (/Users/SSDrive/projects/mediaStudio/media-studio/knowledge), 0 universal (~/.claude/knowledge/store)
+KNOWLEDGE — 39 live claims: 39 from this project (/Users/SSDrive/projects/mediaStudio/media-studio/knowledge), 0 universal (~/.claude/knowledge/store)
 Query before choosing any technique:  python3 ~/.claude/knowledge/bin/find-technique.py "<your situation>"
 
 LAWS — absolute, no exceptions
@@ -66,6 +66,7 @@ VERDICTS — measured, and SCOPED; check the scope before reusing
   · film-look-creator-on-osmo-clip-0014-blows-the-sky-and-breaks-on-a-dwg-timeline DJI Osmo Action 5 Pro clip DJI_20260917182112_0014_D (25 min bike ride at dusk, 4K 29.97 D
   · gpcr-interface-faces-are-90-degrees-apart Class A GPCR heteromers assembled from real coordinates, specifically the A2AR-D2R heterot
   · iphone-camera-app-prores-log-is-apple-log-not-log-2 iPhone 17 Pro, iOS 26.6.2, built-in Camera app with ProRes Log (ProRes 422 HQ 1080p); Reso
+  · nd-and-a-locked-shutter-give-the-osmo-real-4k-detail-on-a-still-frame DJI Osmo Action 5 Pro clip DJI_20260918143132_0002_D (2026-09-18 14:31, 4K 25p, 1/50 s thr
   · osmo-auto-exposure-picks-fast-shutters-and-high-iso-lock-the-shutter DJI Osmo Action 5 Pro on auto exposure, three clips read through the pattern field Dvtm_ac
   · osmo-clip-0004-was-shot-at-about-iso-3200 DJI Osmo Action 5 Pro (firmware field 10.00.16.13), auto exposure, D-Log M, 4K 29.97, clip
   · osmo-dusk-clip-0014-is-4k-pixels-with-less-than-1080p-detail DJI Osmo Action 5 Pro clip DJI_20260917182112_0014_D (dusk bike ride, 18:21 on 2026-09-17,
@@ -112,6 +113,8 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 *From git. The full narrative lives in `docs/journal/`; commit subjects are written as search bait, so `git log --grep` is the index.*
 
 ```
+2026-09-18  156242d  verdict: ND plus a locked 1/50 shutter gives the Osmo real 4K detail on a still frame (sharpness 183, 1080p round trip 2.21 codes); moving frames blur at 1/50 as expected
+2026-09-18  a9fb031  state: regenerated after the Osmo clip 0006 exposure and shake verdict
 2026-09-18  7406b6e  verdict: Osmo auto exposure picks 1/500 at ISO 800-3200 on a sunny street and ISO 12800-25600 in the shed; lock the shutter (clip 0006 Normal 10-bit test)
 2026-09-17  50777d0  claim: retrieval phrasing for the soft-4K Osmo verdict
 2026-09-17  772f433  verdict: Osmo dusk clip 0014 is 4K pixels with less than 1080p detail as shot (1080p round trip changes 0.38 codes vs 1.50 on the daylight clip); the render loses nothing
@@ -122,13 +125,11 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 2026-09-17  09ce341  verdict: Film Look Creator on Osmo clip 0014 renders 20 s of 4K in 80-88 s but blows the dusk sky DJI's LUT holds; DaVinci WG timeline clips harder and FLC renders white blocks there
 2026-09-17  d212a62  film-look-mini: a recipe stage can be a ResolveFX tool (Film Look Creator by input id), and --timeline dwg puts the project on DaVinci WG / Intermediate with DaVinci tone mapping
 2026-09-17  68bf161  state: regenerated after the Fusion capabilities inventory (no code or claims changed)
-2026-09-16  ffed9fb  state: regenerated after the denoise bookmark
-2026-09-16  e3cfd9d  bookmark: denoise high-ISO Osmo footage with Resolve's NoiseReduction OFX in the Fusion comp, then DJI's LUT on node 1 (blocked: Resolve closed)
 ```
 
 ### ⚠ UNPUSHED
 
-**10 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
+**12 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
 
 ```
 git push origin master
