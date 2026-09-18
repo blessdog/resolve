@@ -645,6 +645,317 @@
           }
         }
       ]
+    },
+    "flc-aurora": {
+      "stages": [
+        {
+          "tool": "ofx.com.blackmagicdesign.resolvefx.FilmLook",
+          "role": "film look creator",
+          "inputs": {
+            "inputColorSpace": "REC709_COLORSPACE",
+            "inputGamma": "LINEAR_GAMMA",
+            "outputColorSpace": "REC709_COLORSPACE",
+            "outputGamma": "LINEAR_GAMMA",
+            "grainIsEnable": 0,
+            "flickerIsEnable": 0,
+            "gateWeaveIsEnable": 0,
+            "globalPreset": "GlobalPresetAurora"
+          }
+        }
+      ],
+      "why": "Resolve 21's Aurora global preset: higher contrast, more colour. Untried before 2026-09-18."
+    },
+    "flc-35-cinematic": {
+      "stages": [
+        {
+          "tool": "ofx.com.blackmagicdesign.resolvefx.FilmLook",
+          "role": "film look creator",
+          "inputs": {
+            "inputColorSpace": "REC709_COLORSPACE",
+            "inputGamma": "LINEAR_GAMMA",
+            "outputColorSpace": "REC709_COLORSPACE",
+            "outputGamma": "LINEAR_GAMMA",
+            "grainIsEnable": 0,
+            "flickerIsEnable": 0,
+            "gateWeaveIsEnable": 0,
+            "globalPreset": "GlobalPresetDefault35",
+            "filmLookCore": "CoreLookCinematic"
+          }
+        }
+      ],
+      "why": "Default 35mm base with the Cinematic core look, Blackmagic's own starting point (Ryan, 2026-09-18)."
+    },
+    "flc-35-aurora-core": {
+      "stages": [
+        {
+          "tool": "ofx.com.blackmagicdesign.resolvefx.FilmLook",
+          "role": "film look creator",
+          "inputs": {
+            "inputColorSpace": "REC709_COLORSPACE",
+            "inputGamma": "LINEAR_GAMMA",
+            "outputColorSpace": "REC709_COLORSPACE",
+            "outputGamma": "LINEAR_GAMMA",
+            "grainIsEnable": 0,
+            "flickerIsEnable": 0,
+            "gateWeaveIsEnable": 0,
+            "globalPreset": "GlobalPresetDefault35",
+            "filmLookCore": "CoreLookAurora"
+          }
+        }
+      ],
+      "why": "Default 35mm base with the Aurora core look."
+    },
+    "flc-35-elated": {
+      "stages": [
+        {
+          "tool": "ofx.com.blackmagicdesign.resolvefx.FilmLook",
+          "role": "film look creator",
+          "inputs": {
+            "inputColorSpace": "REC709_COLORSPACE",
+            "inputGamma": "LINEAR_GAMMA",
+            "outputColorSpace": "REC709_COLORSPACE",
+            "outputGamma": "LINEAR_GAMMA",
+            "grainIsEnable": 0,
+            "flickerIsEnable": 0,
+            "gateWeaveIsEnable": 0,
+            "globalPreset": "GlobalPresetDefault35",
+            "filmLookCore": "CoreLookElated"
+          }
+        }
+      ],
+      "why": "Default 35mm base with the Elated core look."
+    },
+    "flc-rich": {
+      "stages": [
+        {
+          "tool": "ofx.com.blackmagicdesign.resolvefx.FilmLook",
+          "role": "film look creator",
+          "inputs": {
+            "inputColorSpace": "REC709_COLORSPACE",
+            "inputGamma": "LINEAR_GAMMA",
+            "outputColorSpace": "REC709_COLORSPACE",
+            "outputGamma": "LINEAR_GAMMA",
+            "grainIsEnable": 0,
+            "flickerIsEnable": 0,
+            "gateWeaveIsEnable": 0,
+            "globalPreset": "GlobalPresetDefault35",
+            "filmLookCore": "CoreLookCinematic",
+            "colorRichness": 1.4,
+            "colorPostSat": 1.45,
+            "colorFade": 0.0,
+            "halationAmount": 0.12,
+            "bloomAmount": 0.1,
+            "colorContrast2": 1.2
+          }
+        }
+      ],
+      "why": "Default 35mm + Cinematic core, pushed for DENSITY: richness 1.4, subtractive saturation 1.45, fade off, halation and bloom slight. Ryan, 2026-09-18: the earlier looks 'reduced the color instead of making it more vibrant'."
+    },
+    "flc-rich-aurora": {
+      "stages": [
+        {
+          "tool": "ofx.com.blackmagicdesign.resolvefx.FilmLook",
+          "role": "film look creator",
+          "inputs": {
+            "inputColorSpace": "REC709_COLORSPACE",
+            "inputGamma": "LINEAR_GAMMA",
+            "outputColorSpace": "REC709_COLORSPACE",
+            "outputGamma": "LINEAR_GAMMA",
+            "grainIsEnable": 0,
+            "flickerIsEnable": 0,
+            "gateWeaveIsEnable": 0,
+            "globalPreset": "GlobalPresetDefault35",
+            "filmLookCore": "CoreLookAurora",
+            "colorRichness": 1.35,
+            "colorPostSat": 1.4,
+            "colorFade": 0.0,
+            "halationAmount": 0.12,
+            "bloomAmount": 0.1
+          }
+        }
+      ],
+      "why": "Aurora core look pushed the same way: richness 1.35, subtractive saturation 1.4, fade off."
+    },
+    "balance-only": {
+      "why": "Ryan's node order (2026-09-18): BALANCE first, then the LOOK. Node 1 corrects the blue cast this clip was shot under (display channel means R 105, G 121, B 135 at 60 s); the look never has to fight it. Gains are grey-world, computed per frame and CHOSEN, not a fixed grade. This recipe is the balance alone, the control.",
+      "stages": [
+        {
+          "tool": "ColorGain",
+          "role": "balance white and exposure",
+          "inputs": {
+            "GainRed": 1.387,
+            "GainGreen": 0.994,
+            "GainBlue": 0.756
+          }
+        }
+      ]
+    },
+    "balance-rich-aurora": {
+      "why": "Ryan's node order (2026-09-18): BALANCE first, then the LOOK. Node 1 corrects the blue cast this clip was shot under (display channel means R 105, G 121, B 135 at 60 s); the look never has to fight it. Gains are grey-world, computed per frame and CHOSEN, not a fixed grade.",
+      "stages": [
+        {
+          "tool": "ColorGain",
+          "role": "balance white and exposure",
+          "inputs": {
+            "GainRed": 1.387,
+            "GainGreen": 0.994,
+            "GainBlue": 0.756
+          }
+        },
+        {
+          "tool": "ofx.com.blackmagicdesign.resolvefx.FilmLook",
+          "role": "look",
+          "inputs": {
+            "inputColorSpace": "REC709_COLORSPACE",
+            "inputGamma": "LINEAR_GAMMA",
+            "outputColorSpace": "REC709_COLORSPACE",
+            "outputGamma": "LINEAR_GAMMA",
+            "grainIsEnable": 0,
+            "flickerIsEnable": 0,
+            "gateWeaveIsEnable": 0,
+            "globalPreset": "GlobalPresetDefault35",
+            "filmLookCore": "CoreLookAurora",
+            "colorRichness": 1.35,
+            "colorPostSat": 1.4,
+            "colorFade": 0.0,
+            "halationAmount": 0.12,
+            "bloomAmount": 0.1
+          }
+        }
+      ]
+    },
+    "balance-soft-rich-aurora": {
+      "why": "Ryan's node order (2026-09-18): BALANCE first, then the LOOK. Node 1 corrects the blue cast this clip was shot under (display channel means R 105, G 121, B 135 at 60 s); the look never has to fight it. Gains are grey-world, computed per frame and CHOSEN, not a fixed grade. 70% of the correction, in case full grey-world overshoots warm.",
+      "stages": [
+        {
+          "tool": "ColorGain",
+          "role": "balance white and exposure (70%)",
+          "inputs": {
+            "GainRed": 1.255,
+            "GainGreen": 0.996,
+            "GainBlue": 0.828
+          }
+        },
+        {
+          "tool": "ofx.com.blackmagicdesign.resolvefx.FilmLook",
+          "role": "look",
+          "inputs": {
+            "inputColorSpace": "REC709_COLORSPACE",
+            "inputGamma": "LINEAR_GAMMA",
+            "outputColorSpace": "REC709_COLORSPACE",
+            "outputGamma": "LINEAR_GAMMA",
+            "grainIsEnable": 0,
+            "flickerIsEnable": 0,
+            "gateWeaveIsEnable": 0,
+            "globalPreset": "GlobalPresetDefault35",
+            "filmLookCore": "CoreLookAurora",
+            "colorRichness": 1.35,
+            "colorPostSat": 1.4,
+            "colorFade": 0.0,
+            "halationAmount": 0.12,
+            "bloomAmount": 0.1
+          }
+        }
+      ]
+    },
+    "balance-rich-cinematic": {
+      "why": "Ryan's node order (2026-09-18): BALANCE first, then the LOOK. Node 1 corrects the blue cast this clip was shot under (display channel means R 105, G 121, B 135 at 60 s); the look never has to fight it. Gains are grey-world, computed per frame and CHOSEN, not a fixed grade.",
+      "stages": [
+        {
+          "tool": "ColorGain",
+          "role": "balance white and exposure",
+          "inputs": {
+            "GainRed": 1.387,
+            "GainGreen": 0.994,
+            "GainBlue": 0.756
+          }
+        },
+        {
+          "tool": "ofx.com.blackmagicdesign.resolvefx.FilmLook",
+          "role": "look",
+          "inputs": {
+            "inputColorSpace": "REC709_COLORSPACE",
+            "inputGamma": "LINEAR_GAMMA",
+            "outputColorSpace": "REC709_COLORSPACE",
+            "outputGamma": "LINEAR_GAMMA",
+            "grainIsEnable": 0,
+            "flickerIsEnable": 0,
+            "gateWeaveIsEnable": 0,
+            "globalPreset": "GlobalPresetDefault35",
+            "filmLookCore": "CoreLookCinematic",
+            "colorRichness": 1.4,
+            "colorPostSat": 1.45,
+            "colorFade": 0.0,
+            "halationAmount": 0.12,
+            "bloomAmount": 0.1,
+            "colorContrast2": 1.2
+          }
+        }
+      ]
+    },
+    "spektra-250d-2383": {
+      "why": "spektrafilm 0.4.7 (free, GPL-3.0), Kodak Vision3 250D on 2383 \u2014 daylight negative on the standard print stock. Grain off. Fed display Rec.709 on a --timeline rec709 project so the emulator's SDR output is gamma-encoded once.",
+      "stages": [
+        {
+          "tool": "ofx.org.spektrafilm",
+          "role": "spektrafilm 250d-2383",
+          "inputs": {
+            "quickInputColorSpace": 19,
+            "quickPresetCategory": 0,
+            "quickPresetSelection": 2,
+            "quickGrainEnabled": 0,
+            "quickHalationEnabled": 1
+          }
+        }
+      ]
+    },
+    "spektra-250d-2393": {
+      "why": "spektrafilm 0.4.7 (free, GPL-3.0), Kodak Vision3 250D on 2393 \u2014 the punchier, higher-contrast print. Grain off. Fed display Rec.709 on a --timeline rec709 project so the emulator's SDR output is gamma-encoded once.",
+      "stages": [
+        {
+          "tool": "ofx.org.spektrafilm",
+          "role": "spektrafilm 250d-2393",
+          "inputs": {
+            "quickInputColorSpace": 19,
+            "quickPresetCategory": 0,
+            "quickPresetSelection": 3,
+            "quickGrainEnabled": 0,
+            "quickHalationEnabled": 1
+          }
+        }
+      ]
+    },
+    "spektra-50d-2383": {
+      "why": "spektrafilm 0.4.7 (free, GPL-3.0), Kodak Vision3 50D on 2383 \u2014 the finest-grain daylight stock. Grain off. Fed display Rec.709 on a --timeline rec709 project so the emulator's SDR output is gamma-encoded once.",
+      "stages": [
+        {
+          "tool": "ofx.org.spektrafilm",
+          "role": "spektrafilm 50d-2383",
+          "inputs": {
+            "quickInputColorSpace": 19,
+            "quickPresetCategory": 0,
+            "quickPresetSelection": 6,
+            "quickGrainEnabled": 0,
+            "quickHalationEnabled": 1
+          }
+        }
+      ]
+    },
+    "spektra-500t-2383": {
+      "why": "spektrafilm 0.4.7 (free, GPL-3.0), Kodak Vision3 500T on 2383 \u2014 tungsten stock in daylight, cooler. Grain off. Fed display Rec.709 on a --timeline rec709 project so the emulator's SDR output is gamma-encoded once.",
+      "stages": [
+        {
+          "tool": "ofx.org.spektrafilm",
+          "role": "spektrafilm 500t-2383",
+          "inputs": {
+            "quickInputColorSpace": 19,
+            "quickPresetCategory": 0,
+            "quickPresetSelection": 4,
+            "quickGrainEnabled": 0,
+            "quickHalationEnabled": 1
+          }
+        }
+      ]
     }
   }
 }
