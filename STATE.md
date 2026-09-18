@@ -3,7 +3,7 @@
 
 # media-studio — STATE
 
-*Generated 2026-09-17 16:42 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
+*Generated 2026-09-17 20:28 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
 
 ## What is open
 
@@ -28,6 +28,9 @@ Every `kind: open` claim in the store. These are PLANS, not specs — `proven: f
 ? every-ingest-and-build-tool-should-write-sha256-   (2026-09-09)
     Every ingest and build tool should write sha256 into IR assets, so reconformed media at the same path compiles
     why: measured 2026-09-09 on summer-reel: after reconforming three clips in place, compile-ir reported 'reused
+? fold-the-d-log-m-highlights-ahead-of-film-look-c   (2026-09-17)
+    Fold the D-Log M highlights ahead of Film Look Creator so a dusk sky holds the way DJI's LUT holds it
+    why: Measured 2026-09-17 on Osmo clip 0014 at 750 s: FLC after the Thatcher D-Log M DCTL puts 13 to 22% of pi
 ? obs-camera-isolates-in-movies-iso-are-an-untouch   (2026-09-07)
     OBS camera isolates in movies/iso are an untouched multicam B-roll lane
     why: Six *-cam.mp4 isolates (Sept 5 and 7 sessions, one 15GB with no matching program recording) exist beside
@@ -44,7 +47,7 @@ Every `kind: open` claim in the store. These are PLANS, not specs — `proven: f
 The full index. Query it before choosing any technique — `find-technique.py "<your situation>"` — rather than reading it. Every claim declares the questions that must find it, and `check-retrieval.py` asserts they do.
 
 ```
-KNOWLEDGE — 34 live claims: 34 from this project (/Users/SSDrive/projects/mediaStudio/media-studio/knowledge), 0 universal (~/.claude/knowledge/store)
+KNOWLEDGE — 36 live claims: 36 from this project (/Users/SSDrive/projects/mediaStudio/media-studio/knowledge), 0 universal (~/.claude/knowledge/store)
 Query before choosing any technique:  python3 ~/.claude/knowledge/bin/find-technique.py "<your situation>"
 
 LAWS — absolute, no exceptions
@@ -60,6 +63,7 @@ VERDICTS — measured, and SCOPED; check the scope before reusing
   · a-4k-clip-on-a-1080p-timeline-thins-per-pixel-grain Resolve Studio 21.1, utility-dctls Film Grain (400 grains per pixel) in a clip's Fusion co
   · a-print-lut-needs-a-cineon-working-space-in-resolve Resolve Studio 21.1.0, davinciYRGBColorManagedv2, a Kodak 2383 print emulation LUT (Juan M
   · a-yrgb-project-timeline-colour-space-is-one-combined-key DaVinci Resolve Studio 21.1.0 on macOS, colorScienceMode davinciYRGB with the default sepa
+  · film-look-creator-on-osmo-clip-0014-blows-the-sky-and-breaks-on-a-dwg-timeline DJI Osmo Action 5 Pro clip DJI_20260917182112_0014_D (25 min bike ride at dusk, 4K 29.97 D
   · gpcr-interface-faces-are-90-degrees-apart Class A GPCR heteromers assembled from real coordinates, specifically the A2AR-D2R heterot
   · iphone-camera-app-prores-log-is-apple-log-not-log-2 iPhone 17 Pro, iOS 26.6.2, built-in Camera app with ProRes Log (ProRes 422 HQ 1080p); Reso
   · osmo-clip-0004-was-shot-at-about-iso-3200 DJI Osmo Action 5 Pro (firmware field 10.00.16.13), auto exposure, D-Log M, 4K 29.97, clip
@@ -87,6 +91,7 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
   ? docs-story-ir-md-is-cited-by-status-md-and-agent Why it matters: the Story IR contract is documented only in schema/story-ir.schema.json an
   ? edit-ir-find-does-not-work-on-a-multi-recording- Why it matters: moments.spans_from_ir raises 'need asset_id' when track 1 references more 
   ? every-ingest-and-build-tool-should-write-sha256- Why it matters: measured 2026-09-09 on summer-reel: after reconforming three clips in plac
+  ? fold-the-d-log-m-highlights-ahead-of-film-look-c Why it matters: Measured 2026-09-17 on Osmo clip 0014 at 750 s: FLC after the Thatcher D-L
   ? obs-camera-isolates-in-movies-iso-are-an-untouch Why it matters: Six -cam.mp4 isolates (Sept 5 and 7 sessions, one 15GB with no matching pr
   ? reshoot-the-osmo-test-with-nd-filters-arriving-2 Why it matters: the first Osmo clip clipped the sky in camera: 1.9 to 3.2% of pixels at th
   ? sync-the-osmo-wav-inside-resolve-with-autosyncau Why it matters: The Osmo's WAV leads its MP4 audio by 116-121 ms (clips 0001 and 0004); to
@@ -105,21 +110,27 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 *From git. The full narrative lives in `docs/journal/`; commit subjects are written as search bait, so `git log --grep` is the index.*
 
 ```
+2026-09-17  e0fb4e7  bookmark: fold D-Log M highlights ahead of Film Look Creator (sky clips 13-27% vs DJI LUT 1.5%; DWG path corrupts)
+2026-09-17  f68a89a  claim: the DWG project's tone mapping was 1000 to 100 nits and the sky still clipped; mechanism open, not guessed
+2026-09-17  29b2652  evidence: taste sheet relabelled so the broken DWG panels say BROKEN and the sky reference says what it is
+2026-09-17  09ce341  verdict: Film Look Creator on Osmo clip 0014 renders 20 s of 4K in 80-88 s but blows the dusk sky DJI's LUT holds; DaVinci WG timeline clips harder and FLC renders white blocks there
+2026-09-17  d212a62  film-look-mini: a recipe stage can be a ResolveFX tool (Film Look Creator by input id), and --timeline dwg puts the project on DaVinci WG / Intermediate with DaVinci tone mapping
+2026-09-17  68bf161  state: regenerated after the Fusion capabilities inventory (no code or claims changed)
 2026-09-16  ffed9fb  state: regenerated after the denoise bookmark
 2026-09-16  e3cfd9d  bookmark: denoise high-ISO Osmo footage with Resolve's NoiseReduction OFX in the Fusion comp, then DJI's LUT on node 1 (blocked: Resolve closed)
 2026-09-16  78c3952  state: regenerated after the 4K renders
 2026-09-16  8e3a69d  verdict: utility-dctls look retired for DJI footage after 4K windows; clip 0004 full 4K conversion with synced WAV in 287 s; DJI's four looks sheet at 4K
 2026-09-16  1d81d9f  verdict: render 4K footage at 4K (Ryan: 'very pixulated... why are you not rendering in 4k?'); 4K timings on the MacBook, conversion 26 s and look 493 s per 30 s
 2026-09-16  8eec86b  film-look-mini: render at the clip's own resolution by default (4K Osmo renders 4K), --render idt renders the camera conversion alone
-2026-09-16  19dd592  evidence: Osmo clip 0004 render is real 1080p at 40 Mbps; same-region crops of 4K original (DJI LUT), 1080p conversion and 1080p look show where the grain comes from
-2026-09-16  5069d5c  state: regenerated after the ISO diagnosis and the emulator candidates
-2026-09-16  0bd1f2b  film-look: free emulator candidates after the Osmo rejection (spektrafilm OFX, OpenDRT, JP-2499, DWG 2383 LUTs, Mononodes) with checked vs reported status
-2026-09-16  1ee053f  verdict: Osmo clip 0004 ran auto exposure at about ISO 3200 and 1/110-1/200 s, the cause of its low-light look (ISO read from DJI field 3-2-3-1 by pattern)
-2026-09-16  f35c618  verdict: Ryan rejected the approved utility-dctls film look on Osmo clip 0004 ("looks like shit"); approved-look scope narrowed to the iPhone clip
-2026-09-16  a1e0d34  state: regenerated after the second Osmo render and the WAV offset verdict
 ```
 
-*Remote: `https://github.com/blessdog/media-studio.git` — `master` is pushed.*
+### ⚠ UNPUSHED
+
+**6 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
+
+```
+git push origin master
+```
 
 ### Uncommitted
 
