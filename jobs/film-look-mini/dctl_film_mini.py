@@ -4,7 +4,7 @@ utility-dctls film pipeline in a clip's Fusion comp and exports stills or a rend
 
     python3 dctl_film_mini.py <clip> <out_dir> <tag> [--recipes a,b] [--grey PNG] [--at S[,S...]] [--fps 24]
                               [--size WxH] [--render NAME[,NAME]] [--window START,END]
-                              [--input NAME] [--recipe-file JSON]
+                              [--input NAME] [--recipe-file JSON] [--timeline linear|dwg]
 
 Without --recipes it builds the recipe marked "approved" in the recipe file (Ryan's pick).
 
@@ -13,6 +13,14 @@ output Rec.709 / Gamma 2.4, no tone or gamut mapping (measured accepted on 21.1,
 is whatever Resolve auto-detects. One timeline per recipe (`<clip stem>-<recipe>`), rebuilt on every run, plus a
 `-null` timeline with no chain as the control. Each DCTL tool is loaded by file name, and its settings are set by their
 UI names (the numbered slots take the DCTL's names once it loads; measured on Film Curve) and read back.
+
+A recipe stage may name a finished ResolveFX instead of a DCTL: `{"tool": "ofx.com.blackmagicdesign.resolvefx.FilmLook",
+"inputs": {id: value}}` sets that tool's inputs by their IDs (the `--list` of flc_mini.py prints them). Such a recipe has no
+printer-lights gain to solve.
+
+--timeline dwg puts the project on DaVinci WG / DaVinci Intermediate with DaVinci tone mapping to Rec.709 Gamma 2.4 (project
+`<tag>-dwg`), for recipes made of finished emulators that expect that working space; the camera conversion input must then
+end in DaVinci Intermediate (dji-action5-dlogm-di). The default, linear, is the DCTL chain's own Rec.709 / Linear space.
 
 --input NAME takes a camera conversion from the recipe file's "inputs" (e.g. dji-action5-dlogm, for footage Resolve
 colour management cannot convert). The clip's input colour space is set to the entry's "clip_input" so Resolve passes the
@@ -70,6 +78,9 @@ FPS = arg("--fps", "24")
 WINDOW = [float(t) for t in arg("--window").split(",")] if arg("--window") else None
 W, H = (int(v) for v in (arg("--size") or source_size(CLIP)).split("x"))
 RENDER = [r for r in (arg("--render") or "").split(",") if r]
+TIMELINE = arg("--timeline", "linear")
+if TIMELINE not in ("linear", "dwg"):
+    sys.exit(f"--timeline {TIMELINE!r}: linear (the DCTL chain's scene-linear Rec.709) or dwg (DaVinci WG / Intermediate with DaVinci tone mapping)")
 RECIPES = film_chain.load(RECIPE_NAMES, arg("--recipe-file") or film_chain.RECIPES)
 INPUT = film_chain.load_input(arg("--input"), arg("--recipe-file") or film_chain.RECIPES) if arg("--input") else None
 os.makedirs(OUT, exist_ok=True)
@@ -86,12 +97,17 @@ for _ in range(150):
 else:
     sys.exit("Resolve stayed busy for 5 minutes (modal dialog up or a render still stopping)")
 
+# linear: every DCTL receives scene-linear Rec.709 and nothing above 1.0 survives the output (the chain owns the tone curve).
+# dwg: the working space Resolve's finished emulators expect; DaVinci tone mapping on the output folds highlights above
+# display white instead of clipping them (measured 2026-09-17 on Osmo clip 0014: the linear timeline put 13 to 24% of a
+# dusk sky at 255 through Film Look Creator, whichever space the tool was told it was fed).
+COLOUR = {"linear": [("colorSpaceTimeline", "Rec.709"), ("colorSpaceTimelineGamma", "Linear"), ("colorSpaceOutputToneMapping", "None")],
+          "dwg": [("colorSpaceTimeline", "DaVinci WG"), ("colorSpaceTimelineGamma", "DaVinci Intermediate"), ("colorSpaceOutputToneMapping", "DaVinci")]}
+PASS_THROUGH = {"linear": "Linear", "dwg": "DaVinci WG/Intermediate"}  # the clip input equal to the timeline, so code values pass untouched
 SETTINGS = [("timelineFrameRate", FPS), ("timelineResolutionWidth", str(W)), ("timelineResolutionHeight", str(H)),
-            ("colorScienceMode", "davinciYRGBColorManagedv2"), ("separateColorSpaceAndGamma", "1"),
-            ("colorSpaceTimeline", "Rec.709"), ("colorSpaceTimelineGamma", "Linear"),
-            ("colorSpaceOutput", "Rec.709"), ("colorSpaceOutputGamma", "Gamma 2.4"),
-            ("colorSpaceOutputToneMapping", "None"), ("colorSpaceOutputGamutMapping", "None")]
-name = f"{TAG}-utility-dctls"
+            ("colorScienceMode", "davinciYRGBColorManagedv2"), ("separateColorSpaceAndGamma", "1"), *COLOUR[TIMELINE],
+            ("colorSpaceOutput", "Rec.709"), ("colorSpaceOutputGamma", "Gamma 2.4"), ("colorSpaceOutputGamutMapping", "None")]
+name = f"{TAG}-utility-dctls" if TIMELINE == "linear" else f"{TAG}-dwg"
 proj = pm.LoadProject(name)
 if not proj:
     proj = pm.CreateProject(name)
@@ -150,7 +166,38 @@ def dctl_entry(tool, dctl):
     return hits[0]
 
 
+def add_ofx_stage(comp, prev, stage, index):
+    # A finished ResolveFX (Film Look Creator, Noise Reduction ...) as a Fusion OFX tool, its inputs set by ID.
+    # The colour page cannot add ResolveFX by script; Fusion can, and it runs BEFORE the colour page, so the camera
+    # conversion has to sit in the same comp ahead of it (measured 2026-09-12, film-look-creator claim).
+    tool = comp.AddTool(stage["tool"])
+    if not tool:
+        sys.exit(f"Fusion refused tool {stage['tool']!r}")
+    tool.SetAttrs({"TOOLS_Name": f"s{index}_{stage.get('role', 'ofx').replace(' ', '_')}"})
+    ids = {str(i.GetAttrs("INPS_ID")): i for i in tool.GetInputList().values()}
+    wrote = {}
+    for pid, value in stage.get("inputs", {}).items():
+        if pid not in ids:
+            sys.exit(f"{stage['tool']}: no input {pid!r}; it exposes {sorted(ids)}")
+        tool.SetInput(pid, value)
+        back = tool.GetInput(pid)
+        if isinstance(value, str):
+            if back != value:
+                sys.exit(f"{stage['tool']}: {pid} set {value!r} but reads {back!r}")
+        elif back is None or abs(float(back) - float(value)) > 1e-4 * max(1.0, abs(float(value))):
+            sys.exit(f"{stage['tool']}: {pid} set {value!r} but reads {back!r}")
+        wrote[pid] = back
+    image_in = next(i for i in tool.GetInputList().values() if i.GetAttrs("INPS_DataType") == "Image")
+    tool.ConnectInput(image_in.GetAttrs("INPS_ID"), prev)
+    if not image_in.GetConnectedOutput():
+        sys.exit(f"{stage['tool']}: image input {image_in.GetAttrs('INPS_ID')!r} did not connect")
+    print(f"    {tool.GetAttrs('TOOLS_Name')}: {stage['tool']} {wrote}")
+    return tool
+
+
 def add_stage(comp, prev, stage, gain, index):
+    if "tool" in stage:
+        return add_ofx_stage(comp, prev, stage, index)
     tool = comp.AddTool(DCTL_ID)
     if not tool:
         sys.exit("Fusion refused the DCTL tool")
@@ -200,12 +247,12 @@ def build(item, recipe, pre=(), source=None):
     comp = item.GetFusionCompByIndex(1) if item.GetFusionCompCount() else item.AddFusionComp()
     reg = {t.GetAttrs("TOOLS_RegID"): t for t in comp.GetToolList(False).values()}
     for t in comp.GetToolList(False).values():
-        if t.GetAttrs("TOOLS_RegID") in (DCTL_ID, RESIZE_ID):
+        if t.GetAttrs("TOOLS_RegID") in (DCTL_ID, RESIZE_ID) or t.GetAttrs("TOOLS_RegID").startswith("ofx.com.blackmagicdesign.resolvefx."):
             t.Delete()
     prev = reg["MediaIn"]
     if source and source != (W, H):
         prev = resize_first(comp, prev, source)
-    gain = film_chain.solve_gain(recipe) if recipe else None
+    gain = film_chain.solve_gain(recipe) if recipe and film_chain.needs_gain(recipe) else None
     for i, stage in enumerate(list(pre) + (recipe["stages"] if recipe else []), 1):
         prev = add_stage(comp, prev, stage, gain, i)
     reg["MediaOut"].ConnectInput("Input", prev)
@@ -262,7 +309,7 @@ if GREY:
 clip = pool_item(CLIP)
 print("clip input as auto-detected:", repr(clip.GetClipProperty("Input Color Space")), "/", repr(clip.GetClipProperty("Input Gamma")))
 if INPUT:
-    set_clip_input(clip, INPUT["clip_input"])
+    set_clip_input(clip, PASS_THROUGH[TIMELINE])
 stem = os.path.splitext(os.path.basename(CLIP))[0].lower().replace("_", "-")
 sources.append((stem, clip, ATS, INPUT["stages"] if INPUT else ()))
 

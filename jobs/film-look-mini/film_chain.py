@@ -47,7 +47,7 @@ def _film_grain_mean(x, p):
 
 
 def _stage(x, st, gain):
-    name, p = st["dctl"], st.get("params", {})
+    name, p = st.get("dctl"), st.get("params", {})
     if name == "Clamp":
         return max(x, 0.0)
     if name == "Film Curve":
@@ -64,6 +64,11 @@ def chain(x, recipe, gain=1.0):
     for st in recipe["stages"]:
         x = _stage(x, st, gain)
     return x
+
+
+def needs_gain(recipe):
+    """True when a stage asks for the solved printer-lights gain; a recipe of finished tools (Film Look Creator) has none."""
+    return any(v == SOLVE for st in recipe["stages"] for v in st.get("params", {}).values())
 
 
 def solve_gain(recipe):
