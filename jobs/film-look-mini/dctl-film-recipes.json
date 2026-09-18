@@ -956,6 +956,89 @@
           }
         }
       ]
+    },
+    "bal-0002": {
+      "why": "Solved BALANCE for window-55-75.mp4 at 5 s by auto_balance.py: channel gains that make the frame neutral and land its median at 0.42, measured inside Resolve on a cineon timeline. Ryan's node order, 2026-09-18: balance first, look second.",
+      "stages": [
+        {
+          "tool": "ColorGain",
+          "role": "balance",
+          "inputs": {
+            "GainRed": 1.1684,
+            "GainGreen": 0.9184,
+            "GainBlue": 0.7713
+          }
+        }
+      ]
+    },
+    "bal-push-1": {
+      "why": "Solved balance, then a density push in the comp (saturation 1.25, contrast 1.08) BEFORE the print LUT on colour node 1 \u2014 saturating the negative, which is where a lab does it. Ryan, 2026-09-18: the earlier grades were 'reducing the color instead of making it more vibrant'.",
+      "stages": [
+        {
+          "tool": "ColorGain",
+          "role": "balance",
+          "inputs": {
+            "GainRed": 1.1684,
+            "GainGreen": 0.9184,
+            "GainBlue": 0.7713
+          }
+        },
+        {
+          "tool": "BrightnessContrast",
+          "role": "density push",
+          "inputs": {
+            "Saturation": 1.25,
+            "Contrast": 1.08,
+            "Gamma": 1.0
+          }
+        }
+      ]
+    },
+    "bal-push-2": {
+      "why": "Solved balance, then a density push in the comp (saturation 1.45, contrast 1.15) BEFORE the print LUT on colour node 1 \u2014 saturating the negative, which is where a lab does it. Ryan, 2026-09-18: the earlier grades were 'reducing the color instead of making it more vibrant'.",
+      "stages": [
+        {
+          "tool": "ColorGain",
+          "role": "balance",
+          "inputs": {
+            "GainRed": 1.1684,
+            "GainGreen": 0.9184,
+            "GainBlue": 0.7713
+          }
+        },
+        {
+          "tool": "BrightnessContrast",
+          "role": "density push",
+          "inputs": {
+            "Saturation": 1.45,
+            "Contrast": 1.15,
+            "Gamma": 1.0
+          }
+        }
+      ]
+    },
+    "bal-push-3": {
+      "why": "Solved balance, then a density push in the comp (saturation 1.7, contrast 1.22) BEFORE the print LUT on colour node 1 \u2014 saturating the negative, which is where a lab does it. Ryan, 2026-09-18: the earlier grades were 'reducing the color instead of making it more vibrant'.",
+      "stages": [
+        {
+          "tool": "ColorGain",
+          "role": "balance",
+          "inputs": {
+            "GainRed": 1.1684,
+            "GainGreen": 0.9184,
+            "GainBlue": 0.7713
+          }
+        },
+        {
+          "tool": "BrightnessContrast",
+          "role": "density push",
+          "inputs": {
+            "Saturation": 1.7,
+            "Contrast": 1.22,
+            "Gamma": 1.0
+          }
+        }
+      ]
     }
   }
 }

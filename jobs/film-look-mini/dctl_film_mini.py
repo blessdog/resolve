@@ -79,8 +79,9 @@ WINDOW = [float(t) for t in arg("--window").split(",")] if arg("--window") else 
 W, H = (int(v) for v in (arg("--size") or source_size(CLIP)).split("x"))
 RENDER = [r for r in (arg("--render") or "").split(",") if r]
 TIMELINE = arg("--timeline", "linear")
-if TIMELINE not in ("linear", "dwg", "rec709"):
-    sys.exit(f"--timeline {TIMELINE!r}: linear (scene-linear Rec.709, the DCTL chain), dwg (DaVinci WG / Intermediate) or rec709 (display-referred Rec.709 Gamma 2.4 in and out)")
+PRINT_LUT = arg("--print-lut")  # e.g. "Film Looks/Rec709 Kodak 2383 D65.cube"; goes on COLOUR node 1, which runs AFTER the comp
+if TIMELINE not in ("linear", "dwg", "rec709", "cineon"):
+    sys.exit(f"--timeline {TIMELINE!r}: linear (scene-linear Rec.709, the DCTL chain), dwg (DaVinci WG / Intermediate) or rec709 (display-referred Rec.709 Gamma 2.4 in and out) or cineon (Rec.709 primaries / Cineon Film Log, what a print LUT expects)")
 RECIPES = film_chain.load(RECIPE_NAMES, arg("--recipe-file") or film_chain.RECIPES)
 INPUT = film_chain.load_input(arg("--input"), arg("--recipe-file") or film_chain.RECIPES) if arg("--input") else None
 os.makedirs(OUT, exist_ok=True)
@@ -106,11 +107,14 @@ else:
 # of 23, the signature of a second gamma encode on an already display-referred output.
 COLOUR = {"linear": [("colorSpaceTimeline", "Rec.709"), ("colorSpaceTimelineGamma", "Linear"), ("colorSpaceOutputToneMapping", "None")],
           "dwg": [("colorSpaceTimeline", "DaVinci WG"), ("colorSpaceTimelineGamma", "DaVinci Intermediate"), ("colorSpaceOutputToneMapping", "DaVinci")],
-          "rec709": [("colorSpaceTimeline", "Rec.709"), ("colorSpaceTimelineGamma", "Gamma 2.4"), ("colorSpaceOutputToneMapping", "None")]}
-PASS_THROUGH = {"linear": "Linear", "dwg": "DaVinci WG/Intermediate", "rec709": "Rec.709"}  # the clip input equal to the timeline, so code values pass untouched
+          "rec709": [("colorSpaceTimeline", "Rec.709"), ("colorSpaceTimelineGamma", "Gamma 2.4"), ("colorSpaceOutputToneMapping", "None")],
+          "cineon": [("colorSpaceTimeline", "Rec.709"), ("colorSpaceTimelineGamma", "Cineon Film Log"), ("colorSpaceOutputToneMapping", "None")]}
+PASS_THROUGH = {"linear": "Linear", "dwg": "DaVinci WG/Intermediate", "rec709": "Rec.709", "cineon": "Rec.709"}  # the clip input equal to the timeline, so code values pass untouched
 SETTINGS = [("timelineFrameRate", FPS), ("timelineResolutionWidth", str(W)), ("timelineResolutionHeight", str(H)),
             ("colorScienceMode", "davinciYRGBColorManagedv2"), ("separateColorSpaceAndGamma", "1"), *COLOUR[TIMELINE],
-            ("colorSpaceOutput", "Rec.709"), ("colorSpaceOutputGamma", "Gamma 2.4"), ("colorSpaceOutputGamutMapping", "None")]
+            ("colorSpaceOutput", "Rec.709"),
+            ("colorSpaceOutputGamma", "Cineon Film Log" if TIMELINE == "cineon" else "Gamma 2.4"),
+            ("colorSpaceOutputGamutMapping", "None")]
 name = f"{TAG}-utility-dctls" if TIMELINE == "linear" else f"{TAG}-{TIMELINE}"
 proj = pm.LoadProject(name)
 if not proj:
@@ -325,7 +329,13 @@ for label, item, times, pre in sources:
         tl_name = f"{label}-{rname}"
         print(f"\n[{tl_name}]")
         tl = fresh_timeline(tl_name, item)
-        gain = build(tl.GetItemListInTrack("video", 1)[0], recipe, () if rname == "null" else pre, size)
+        _item = tl.GetItemListInTrack("video", 1)[0]
+        gain = build(_item, recipe, () if rname == "null" else pre, size)
+        if PRINT_LUT and rname != "null":
+            g = _item.GetNodeGraph()
+            if not g.SetLUT(1, PRINT_LUT):
+                sys.exit(f"SetLUT(1, {PRINT_LUT!r}) refused")
+            print(f"    colour node 1 LUT: {g.GetLUT(1)}")
         if gain is not None:
             print(f"  printer-lights gain {gain:.6g}")
         for t in times:
