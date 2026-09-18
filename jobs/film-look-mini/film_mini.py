@@ -11,7 +11,7 @@
 The clip's input colour space is whatever Resolve auto-detects, printed so it can be
 checked; it is only set by hand when Resolve detects nothing Apple Log shaped.
 
-    python3 film_mini.py <clip> <out_dir> <tag> [print|flc ...]
+    python3 film_mini.py <clip> <out_dir> <tag> [print|flc ...] [--size WxH] [--fps N] [--force-apple-log]
 """
 import glob
 import os
@@ -25,9 +25,16 @@ os.environ.setdefault("RESOLVE_SCRIPT_LIB",
 sys.path.append(os.path.join(API, "Modules"))
 import DaVinciResolveScript as dvr  # noqa: E402
 
-CLIP, OUT, TAG = sys.argv[1:4]
+CLIP, OUT, TAG = os.path.abspath(sys.argv[1]), os.path.abspath(sys.argv[2]), sys.argv[3]
+# Both paths must be absolute: ImportMedia silently returns [] for a relative clip, and a relative
+# TargetDir raises Resolve's modal 'Render Path Inaccessible', which then blocks every later script
+# (measured 2026-09-18 on the Osmo window).
 ROUTES = sys.argv[4:] or ["print", "flc"]
 PRINT_LUT = "Film Looks/Rec709 Kodak 2383 D65.cube"
+# --force-apple-log is for iPhone clips Resolve fails to recognise. A display-referred source
+# (DJI Normal) must keep its auto-detected Rec.709 input, which colour management converts to
+# the Cineon Film Log working space the print LUT was built for.
+FORCE_APPLE_LOG = "--force-apple-log" in sys.argv
 FLC_ID = "ofx.com.blackmagicdesign.resolvefx.FilmLook"
 W, H = (int(x) for x in (sys.argv[sys.argv.index("--size") + 1] if "--size" in sys.argv else "1920x1080").split("x"))
 KEYS = ("colorScienceMode", "separateColorSpaceAndGamma", "colorSpaceTimeline", "colorSpaceTimelineGamma",
@@ -82,7 +89,7 @@ def clip_on_timeline(proj, name):
     mpi = item.GetMediaPoolItem()
     space, gamma = mpi.GetClipProperty("Input Color Space"), mpi.GetClipProperty("Input Gamma")
     print(f"  Resolve auto-detected input: space {space!r}, gamma {gamma!r}")
-    if "apple" not in f"{space} {gamma}".lower():
+    if FORCE_APPLE_LOG and "apple" not in f"{space} {gamma}".lower():
         print("  nothing Apple Log shaped detected; setting Apple Log by hand")
         for v in ("Apple Log", "Apple Log Rec.2020 - CSC"):
             if mpi.SetClipProperty("Input Color Space", v):

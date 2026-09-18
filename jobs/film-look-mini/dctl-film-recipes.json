@@ -575,6 +575,76 @@
           }
         }
       ]
+    },
+    "flc-clean-restrained": {
+      "why": "Film Look Creator with GRAIN OFF, for footage that is already clean (Ryan, 2026-09-18: 'I'm not looking for the film grain because the quality is not already grainy'). Default65 base, flicker and gate weave off, halation and bloom at 0.1, contrast eased to 1.15. For a display-referred (Normal, not log) source: no camera conversion stage, the clip's auto-detected Rec.709 input is linearised by colour management. Every number is CHOSEN, not measured.",
+      "stages": [
+        {
+          "tool": "ofx.com.blackmagicdesign.resolvefx.FilmLook",
+          "role": "film look creator clean",
+          "inputs": {
+            "globalPreset": "GlobalPresetDefault65",
+            "inputColorSpace": "REC709_COLORSPACE",
+            "inputGamma": "LINEAR_GAMMA",
+            "outputColorSpace": "REC709_COLORSPACE",
+            "outputGamma": "LINEAR_GAMMA",
+            "colorContrast2": 1.15,
+            "halationAmount": 0.1,
+            "bloomAmount": 0.1,
+            "grainIsEnable": 0,
+            "flickerIsEnable": 0,
+            "gateWeaveIsEnable": 0
+          }
+        }
+      ]
+    },
+    "flc-clean-cinematic": {
+      "why": "Film Look Creator's shipped 'Cinematic' global preset with GRAIN OFF, otherwise untouched. Ships with a 2.4:1 film gate, so this panel is letterboxed by design.",
+      "stages": [
+        {
+          "tool": "ofx.com.blackmagicdesign.resolvefx.FilmLook",
+          "role": "film look creator cinematic clean",
+          "inputs": {
+            "globalPreset": "GlobalPresetCinematic",
+            "inputColorSpace": "REC709_COLORSPACE",
+            "inputGamma": "LINEAR_GAMMA",
+            "outputColorSpace": "REC709_COLORSPACE",
+            "outputGamma": "LINEAR_GAMMA",
+            "grainIsEnable": 0
+          }
+        }
+      ]
+    },
+    "flc-clean-dof": {
+      "why": "flc-clean-restrained plus CineFocus, Resolve's depth-map defocus. An action cam's tiny sensor and 155-degree lens give near-infinite depth of field, which reads 'action cam' whatever the colour does; separating a subject from its background is an OPTICAL lever, not a colour one. Aperture and focus distance are CHOSEN.",
+      "stages": [
+        {
+          "tool": "ofx.com.blackmagicdesign.resolvefx.FilmLook",
+          "role": "film look creator clean",
+          "inputs": {
+            "globalPreset": "GlobalPresetDefault65",
+            "inputColorSpace": "REC709_COLORSPACE",
+            "inputGamma": "LINEAR_GAMMA",
+            "outputColorSpace": "REC709_COLORSPACE",
+            "outputGamma": "LINEAR_GAMMA",
+            "colorContrast2": 1.15,
+            "halationAmount": 0.1,
+            "bloomAmount": 0.1,
+            "grainIsEnable": 0,
+            "flickerIsEnable": 0,
+            "gateWeaveIsEnable": 0
+          }
+        },
+        {
+          "tool": "ofx.com.blackmagicdesign.resolvefx.CineFocus",
+          "role": "depth of field",
+          "inputs": {
+            "apertureEnhanced": 0.75,
+            "focusDistance": 0.35,
+            "focusExtendRange": 0.3
+          }
+        }
+      ]
     }
   }
 }
