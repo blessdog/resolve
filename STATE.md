@@ -3,7 +3,7 @@
 
 # media-studio — STATE
 
-*Generated 2026-09-18 17:25 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
+*Generated 2026-09-19 08:19 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
 
 ## What is open
 
@@ -47,7 +47,7 @@ Every `kind: open` claim in the store. These are PLANS, not specs — `proven: f
 The full index. Query it before choosing any technique — `find-technique.py "<your situation>"` — rather than reading it. Every claim declares the questions that must find it, and `check-retrieval.py` asserts they do.
 
 ```
-KNOWLEDGE — 43 live claims: 43 from this project (/Users/SSDrive/projects/mediaStudio/media-studio/knowledge), 0 universal (~/.claude/knowledge/store)
+KNOWLEDGE — 44 live claims: 44 from this project (/Users/SSDrive/projects/mediaStudio/media-studio/knowledge), 0 universal (~/.claude/knowledge/store)
 Query before choosing any technique:  python3 ~/.claude/knowledge/bin/find-technique.py "<your situation>"
 
 LAWS — absolute, no exceptions
@@ -56,6 +56,7 @@ LAWS — absolute, no exceptions
 
 PROCEDURES — the routes that are currently believed
   · film-look-creator-renders-on-the-mini-through-a-fusion-comp answers how-to-apply-film-look-creator-by-script   (sibling: none)
+  · match-a-reference-photos-grade-by-baking-color-matcher-into-a-cube answers how-to-match-a-grade-from-a-reference-photo   (sibling: the-osmo-film-chain-balance-then-cdl-in-log-then-a-print-lut)
   · osmo-d-log-m-into-resolve-goes-through-the-idt-dctl answers how-to-convert-osmo-action-5-pro-d-log-m-in-resolve   (sibling: none)
   · photos-library-originals-come-down-with-osxphotos answers how-to-get-a-photos-library-video-into-the-studio   (sibling: none)
   · the-osmo-film-chain-balance-then-cdl-in-log-then-a-print-lut answers how-to-make-osmo-footage-look-cinematic   (sibling: none)
@@ -117,6 +118,8 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 *From git. The full narrative lives in `docs/journal/`; commit subjects are written as search bait, so `git log --grep` is the index.*
 
 ```
+2026-09-19  47f8f70  match a grade from a reference photo: color-matcher fit recovered by least squares and baked to a 33-cube, applied on colour node 1 (0.75 strength lands within 4 codes of the reference)
+2026-09-18  3648f86  state: regenerated after the working film chain and the card-offload verification
 2026-09-18  c164096  film chain that works on Osmo footage: solved balance, CDL density in log, Kodak 2383 print last; auto_balance.py converges the cast from 13.2 to 0.9 codes
 2026-09-18  3446ce6  state: regenerated after the spektrafilm install and the rejected-look law
 2026-09-18  98fd3c6  spektrafilm installs with no admin password via OFX_PLUGIN_PATH, but its menus are invisible to scripting; law: when a look is rejected change the TOOL, not the parameter
@@ -127,13 +130,11 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 2026-09-18  156242d  verdict: ND plus a locked 1/50 shutter gives the Osmo real 4K detail on a still frame (sharpness 183, 1080p round trip 2.21 codes); moving frames blur at 1/50 as expected
 2026-09-18  a9fb031  state: regenerated after the Osmo clip 0006 exposure and shake verdict
 2026-09-18  7406b6e  verdict: Osmo auto exposure picks 1/500 at ISO 800-3200 on a sunny street and ISO 12800-25600 in the shed; lock the shutter (clip 0006 Normal 10-bit test)
-2026-09-17  50777d0  claim: retrieval phrasing for the soft-4K Osmo verdict
-2026-09-17  772f433  verdict: Osmo dusk clip 0014 is 4K pixels with less than 1080p detail as shot (1080p round trip changes 0.38 codes vs 1.50 on the daylight clip); the render loses nothing
 ```
 
 ### ⚠ UNPUSHED
 
-**19 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
+**21 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
 
 ```
 git push origin master
