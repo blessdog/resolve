@@ -1,6 +1,6 @@
-# media-studio
+# resolve
 
-> **NAME IS A PLACEHOLDER** — Ryan hasn't blessed a name yet. Renaming is one `mv`.
+> Named `resolve` on 2026-09-19 (was `media-studio`, a placeholder that collided with the `mediaStudio` workspace folder around it). GitHub: blessdog/resolve; the old URL redirects.
 
 The content-agnostic **agentic instrument layer** between Ryan (and his AI
 agents) and DaVinci Resolve Studio — the way BlessDog sits between him and
@@ -48,4 +48,4 @@ ground truth, not trusted.
 Working plumbing, honest about being plumbing: the instrument layer
 runs end-to-end against Resolve Studio; what's rendered so far is
 smoke fixtures and verification clips, not showpieces. The consumers
-(bongpot, cutwork) drive what gets built next. Name is a placeholder.
+(bongpot, cutwork) drive what gets built next.

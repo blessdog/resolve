@@ -1,4 +1,4 @@
-# CLAUDE.md — media-studio
+# CLAUDE.md — resolve
 
 **Read `AGENTS.md` first** — it is the harness-neutral operating manual (what
 this project is, the working loop, the CLI verbs, hard doctrine). This file

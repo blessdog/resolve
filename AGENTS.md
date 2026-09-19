@@ -198,7 +198,7 @@ ignored, and those live in `outputs/`.
 
 | Repo | Remote | Owns |
 |---|---|---|
-| `media-studio` (this one) | `git@github.com:blessdog/media-studio.git` — **private**, default branch `master` | video: capture → ingest → Story IR → Resolve → delivery |
+| `resolve` (this one, was `media-studio` until 2026-09-19) | `https://github.com/blessdog/resolve.git` — **private**, default branch `master` | video: capture → ingest → Story IR → Resolve → delivery |
 | `~/projects/blessdog` | `git@github.com:blessdog/blessdog.git` | music: Ableton control + `phase8_sp404` SP-404MK2 sample lane |
 
 - **Committing is not finishing. Push.** This repo existed for weeks with no
@@ -216,7 +216,7 @@ ignored, and those live in `outputs/`.
   `phase8_sp404`'s `LedgerEntry.source_clip_hash` references an asset in this
   repo's `registry.db`. Keep it that way; a code dependency between them would
   collapse the boundary.
-- media-studio is **private** — it carries absolute paths, machine layout and
+- resolve is **private** — it carries absolute paths, machine layout and
   business context. Do not make it public without Ryan saying so.
 
 ## Which document wins (truth hierarchy)
@@ -247,8 +247,8 @@ sessions write plausible prose and the file quietly disagrees with itself
 (STATUS.md said pipeline G2 was both done and to-do, 776 lines apart).
 
 ```
-make worktree NAME=music        # ../media-studio-music on branch lane/music
-cd ../media-studio-music        # open the second Claude session HERE
+make worktree NAME=music        # ../resolve-music on branch lane/music
+cd ../resolve-music        # open the second Claude session HERE
 make hooks                      # the gate is per-checkout
 ...
 git push -u origin lane/music   # merge to master when the lane is done

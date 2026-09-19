@@ -1,4 +1,4 @@
-# media-studio — the gate.
+# resolve — the gate.
 #
 # Nothing in this repo ran its own tests until 2026-08-03. Eight test files
 # existed and were executed only when someone remembered, which is why AGENTS.md
@@ -66,8 +66,8 @@ hooks:
 # AGENTS.md §Concurrent sessions.
 worktree:
 	@test -n "$(NAME)" || { printf 'usage: make worktree NAME=music\n'; exit 1; }
-	@git worktree add "../media-studio-$(NAME)" -b "lane/$(NAME)"
-	@printf '\nopen the second session in ../media-studio-%s\n' "$(NAME)"
+	@git worktree add "../resolve-$(NAME)" -b "lane/$(NAME)"
+	@printf '\nopen the second session in ../resolve-%s\n' "$(NAME)"
 	@printf 'then run: make hooks   (the gate is per-checkout)\n'
 
 worktree-list:
@@ -75,5 +75,5 @@ worktree-list:
 
 worktree-rm:
 	@test -n "$(NAME)" || { printf 'usage: make worktree-rm NAME=music\n'; exit 1; }
-	@git worktree remove "../media-studio-$(NAME)"
+	@git worktree remove "../resolve-$(NAME)"
 	@printf 'removed. branch lane/%s still exists — delete it if merged.\n' "$(NAME)"
