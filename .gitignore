@@ -17,3 +17,5 @@ vendor/*
 # Job folders are TRACKED (text, scripts, source structures, curated evidence).
 # Only Python bytecode is not.
 jobs/**/__pycache__/
+
+.venv-colour/
