@@ -3,7 +3,7 @@
 
 # resolve — STATE
 
-*Generated 2026-09-21 20:40 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
+*Generated 2026-09-22 07:25 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
 
 ## What is open
 
@@ -34,9 +34,14 @@ Every `kind: open` claim in the store. These are PLANS, not specs — `proven: f
 ? obs-camera-isolates-in-movies-iso-are-an-untouch   (2026-09-07)
     OBS camera isolates in movies/iso are an untouched multicam B-roll lane
     why: Six *-cam.mp4 isolates (Sept 5 and 7 sessions, one 15GB with no matching program recording) exist beside
+? render-clip-0002-on-the-mac-mini-to-close-ryan-s   (2026-09-21)
+    render clip 0002 on the Mac mini to close Ryan's 'render on the mini' directive
+    why: Ryan said it twice (2026-09-21) and the mini has rendered ZERO of the four ride clips. All of them were 
 ? reshoot-the-osmo-test-with-nd-filters-arriving-2   (2026-09-16)
     Reshoot the Osmo test with ND filters (arriving 2026-09-17), 24p at 1/48
     why: the first Osmo clip clipped the sky in camera: 1.9 to 3.2% of pixels at the maximum code in the 60 s and
+? resolve-on-the-mini-wedges-at-700-percent-cpu-and-stops-answering   (2026-09-21)
+    **Resolve Studio 21.1.0 on the Mac mini wedged at ~700% CPU for two hours after a scripted
 ? sync-the-osmo-wav-inside-resolve-with-autosyncau   (2026-09-16)
     Sync the Osmo WAV inside Resolve with AutoSyncAudio
     why: The Osmo's WAV leads its MP4 audio by 116-121 ms (clips 0001 and 0004); today the fix is a hand-measured
@@ -47,7 +52,7 @@ Every `kind: open` claim in the store. These are PLANS, not specs — `proven: f
 The full index. Query it before choosing any technique — `find-technique.py "<your situation>"` — rather than reading it. Every claim declares the questions that must find it, and `check-retrieval.py` asserts they do.
 
 ```
-KNOWLEDGE — 50 live claims: 50 from this project (/Users/SSDrive/projects/mediaStudio/resolve/knowledge), 0 universal (~/.claude/knowledge/store)
+KNOWLEDGE — 54 live claims: 54 from this project (/Users/SSDrive/projects/mediaStudio/resolve/knowledge), 0 universal (~/.claude/knowledge/store)
 Query before choosing any technique:  python3 ~/.claude/knowledge/bin/find-technique.py "<your situation>"
 
 LAWS — absolute, no exceptions
@@ -67,6 +72,7 @@ VERDICTS — measured, and SCOPED; check the scope before reusing
   · a-4k-clip-on-a-1080p-timeline-thins-per-pixel-grain Resolve Studio 21.1, utility-dctls Film Grain (400 grains per pixel) in a clip's Fusion co
   · a-print-lut-needs-a-cineon-working-space-in-resolve Resolve Studio 21.1.0, davinciYRGBColorManagedv2, a Kodak 2383 print emulation LUT (Juan M
   · a-reference-matched-lut-already-carries-the-white-balance Osmo Action 5 Pro dusk footage in Rec.709 (not D-Log M), graded with match-fashion-hm-mkl-
+  · a-resolve-project-locks-its-frame-rate-once-it-has-a-timeline DaVinci Resolve Studio 21.1.0 driven by script; SetSettings({"timelineFrameRate": ...}) on
   · a-yrgb-project-timeline-colour-space-is-one-combined-key DaVinci Resolve Studio 21.1.0 on macOS, colorScienceMode davinciYRGB with the default sepa
   · film-look-creator-on-osmo-clip-0014-blows-the-sky-and-breaks-on-a-dwg-timeline DJI Osmo Action 5 Pro clip DJI_20260917182112_0014_D (25 min bike ride at dusk, 4K 29.97 D
   · gpcr-interface-faces-are-90-degrees-apart Class A GPCR heteromers assembled from real coordinates, specifically the A2AR-D2R heterot
@@ -96,6 +102,7 @@ VERDICTS — measured, and SCOPED; check the scope before reusing
 
 REFUTED — already tried, do NOT retry
   ✗ an-rsync-remote-path-with-a-space-arrives-as-two-arguments rsync hands the remote path to the remote login shell as text, the shell word-splits it, and the far
+  ✗ applying-a-cube-offline-does-not-predict-what-resolve-renders the .cube on a colour node does not receive the file's code values; Resolve's managed input transfor
   ✗ auto-editor-multi-input-drops-inputs-from-v3-export on the v3 export path the first input is consumed as the templateFile (stream rotation and attachmen
 
 OPEN — plans, NOT specs. proven: false. Do not build against these.
@@ -107,7 +114,9 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
   ? every-ingest-and-build-tool-should-write-sha256- Why it matters: measured 2026-09-09 on summer-reel: after reconforming three clips in plac
   ? fold-the-d-log-m-highlights-ahead-of-film-look-c Why it matters: Measured 2026-09-17 on Osmo clip 0014 at 750 s: FLC after the Thatcher D-L
   ? obs-camera-isolates-in-movies-iso-are-an-untouch Why it matters: Six -cam.mp4 isolates (Sept 5 and 7 sessions, one 15GB with no matching pr
+  ? render-clip-0002-on-the-mac-mini-to-close-ryan-s Why it matters: Ryan said it twice (2026-09-21) and the mini has rendered ZERO of the four
   ? reshoot-the-osmo-test-with-nd-filters-arriving-2 Why it matters: the first Osmo clip clipped the sky in camera: 1.9 to 3.2% of pixels at th
+  ? resolve-on-the-mini-wedges-at-700-percent-cpu-and-stops-answering Resolve Studio 21.1.0 on the Mac mini wedged at ~700% CPU for two hours after a scripted
   ? sync-the-osmo-wav-inside-resolve-with-autosyncau Why it matters: The Osmo's WAV leads its MP4 audio by 116-121 ms (clips 0001 and 0004); to
 ```
 
@@ -124,6 +133,9 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 *From git. The full narrative lives in `docs/journal/`; commit subjects are written as search bait, so `git log --grep` is the index.*
 
 ```
+2026-09-21  0c33de8  bookmark: the mini rendered none of the four clips, so 'render on the mini' is blocked not closed
+2026-09-21  a0e989d  four Osmo ride clips delivered at 4K, and the offline LUT preview that nearly became a tool is a dead end
+2026-09-21  fe1d551  read back the project frame rate too: Resolve locks it once a timeline exists and silently dropped 15 of 89 frames
 2026-09-21  b306a05  render 4K graded Osmo clips on either machine: one remote driver with a LUT readback gate, and the mini must PULL footage (15.6 MB/s) not be pushed to (3.7)
 2026-09-21  d26f1d4  verdict: Resolve reads LUTs only from /Library so SetLUT fails silently on a user-folder LUT and renders come out ungraded; never pkill Resolve, it kills scripting
 2026-09-21  40c16be  state: regenerated after the slow-motion route and the mini render proof
@@ -133,18 +145,23 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 2026-09-19  8904a01  STATE regenerated after the rename to resolve
 2026-09-19  5733d17  rename: media-studio → resolve
 2026-09-19  6f2650a  state: regenerated after the reference-photo colour match
-2026-09-19  47f8f70  match a grade from a reference photo: color-matcher fit recovered by least squares and baked to a 33-cube, applied on colour node 1 (0.75 strength lands within 4 codes of the reference)
-2026-09-18  3648f86  state: regenerated after the working film chain and the card-offload verification
-2026-09-18  c164096  film chain that works on Osmo footage: solved balance, CDL density in log, Kodak 2383 print last; auto_balance.py converges the cast from 13.2 to 0.9 codes
 ```
 
 ### ⚠ UNPUSHED
 
-**6 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
+**9 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
 
 ```
 git push origin master
 ```
+
+### Uncommitted
+
+```
+ M STATE.md
+```
+
+*Uncommitted is not learned. Commit at the moment of learning.*
 
 ---
 
