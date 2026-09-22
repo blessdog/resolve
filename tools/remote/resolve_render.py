@@ -114,6 +114,15 @@ for k, v in (("timelineFrameRate", FPS), ("timelineResolutionWidth", str(W)),
 read = proj.GetSettings()
 print("project", PROJECT, {k: read.get(k) for k in ("timelineFrameRate", "timelineResolutionWidth",
                                                     "colorSpaceTimeline", "colorSpaceTimelineGamma")})
+# Resolve REFUSES to change timelineFrameRate on a project that already holds a timeline, and
+# says so only by leaving the old value in place. Measured 2026-09-21: a 29.97 clip asked for
+# 29.97 landed in a 25 fps project left over from an earlier clip and was conformed to 74 frames
+# instead of 89 -- fifteen frames of motion dropped, duration unchanged, nothing logged. So the
+# rate is READ BACK, and one project per frame rate is the caller's job.
+if abs(float(read.get("timelineFrameRate") or 0) - float(FPS)) > 0.01:
+    sys.exit(f"project {PROJECT!r} is at {read.get('timelineFrameRate')} fps and will not move to "
+             f"{FPS}: Resolve locks the rate once a project has timelines. Use a project per rate "
+             f"(e.g. --project {PROJECT}-{str(FPS).replace('.', '')}). Refusing to conform the clip.")
 
 mp = proj.GetMediaPool()
 items = [c for c in mp.GetRootFolder().GetClipList() if c.GetClipProperty("File Path") == CLIP]

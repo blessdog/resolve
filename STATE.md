@@ -3,7 +3,7 @@
 
 # resolve — STATE
 
-*Generated 2026-09-21 18:45 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
+*Generated 2026-09-21 20:40 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
 
 ## What is open
 
@@ -47,7 +47,7 @@ Every `kind: open` claim in the store. These are PLANS, not specs — `proven: f
 The full index. Query it before choosing any technique — `find-technique.py "<your situation>"` — rather than reading it. Every claim declares the questions that must find it, and `check-retrieval.py` asserts they do.
 
 ```
-KNOWLEDGE — 48 live claims: 48 from this project (/Users/SSDrive/projects/mediaStudio/resolve/knowledge), 0 universal (~/.claude/knowledge/store)
+KNOWLEDGE — 50 live claims: 50 from this project (/Users/SSDrive/projects/mediaStudio/resolve/knowledge), 0 universal (~/.claude/knowledge/store)
 Query before choosing any technique:  python3 ~/.claude/knowledge/bin/find-technique.py "<your situation>"
 
 LAWS — absolute, no exceptions
@@ -66,6 +66,7 @@ PROCEDURES — the routes that are currently believed
 VERDICTS — measured, and SCOPED; check the scope before reusing
   · a-4k-clip-on-a-1080p-timeline-thins-per-pixel-grain Resolve Studio 21.1, utility-dctls Film Grain (400 grains per pixel) in a clip's Fusion co
   · a-print-lut-needs-a-cineon-working-space-in-resolve Resolve Studio 21.1.0, davinciYRGBColorManagedv2, a Kodak 2383 print emulation LUT (Juan M
+  · a-reference-matched-lut-already-carries-the-white-balance Osmo Action 5 Pro dusk footage in Rec.709 (not D-Log M), graded with match-fashion-hm-mkl-
   · a-yrgb-project-timeline-colour-space-is-one-combined-key DaVinci Resolve Studio 21.1.0 on macOS, colorScienceMode davinciYRGB with the default sepa
   · film-look-creator-on-osmo-clip-0014-blows-the-sky-and-breaks-on-a-dwg-timeline DJI Osmo Action 5 Pro clip DJI_20260917182112_0014_D (25 min bike ride at dusk, 4K 29.97 D
   · gpcr-interface-faces-are-90-degrees-apart Class A GPCR heteromers assembled from real coordinates, specifically the A2AR-D2R heterot
@@ -88,6 +89,7 @@ VERDICTS — measured, and SCOPED; check the scope before reusing
   · the-approved-film-look-fails-on-osmo-clip-0004 recipe rich-halation-grain-400 (utility-dctls, 400 grains per pixel) after the D-Log M con
   · the-cinematic-levers-ranked-on-the-osmo-exposure-then-optics-then-tone DJI Osmo Action 5 Pro, 4K, clips 0001 / 0006 / 0014 (detail measurements) and clip DJI_202
   · the-mac-mini-has-resolve-studio-and-renders-over-ssh Ryans-Mac-mini.local (ssh host `mini`), macOS 26.4.1, M1, 8 GB RAM, 29 GB free of 228 GB, 
+  · the-mini-must-pull-footage-the-macbook-cannot-push-it MacBook (Wi-Fi 802.11ax, 5 GHz ch36 80 MHz, -67 dBm, 144 Mbps tx rate) to Mac mini (gigabi
   · the-mini-renders-the-story-ir-with-ffmpeg-not-resolve straight-cut timelines (track-1 edits only) rendered from a workspace's story.json; the Ma
   · the-native-resolve-mcp-server-works-over-stdio DaVinci Resolve Studio 21.1.0.14 on this MacBook (macOS 26), external scripting = Local, R
   · the-osmo-wav-leads-its-mp4-audio-by-about-120-ms DJI Osmo Action 5 Pro, two clips shot 2026-09-16 (DJI_20260916114233_0001_D, DJI_202609161
@@ -122,6 +124,7 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 *From git. The full narrative lives in `docs/journal/`; commit subjects are written as search bait, so `git log --grep` is the index.*
 
 ```
+2026-09-21  b306a05  render 4K graded Osmo clips on either machine: one remote driver with a LUT readback gate, and the mini must PULL footage (15.6 MB/s) not be pushed to (3.7)
 2026-09-21  d26f1d4  verdict: Resolve reads LUTs only from /Library so SetLUT fails silently on a user-folder LUT and renders come out ungraded; never pkill Resolve, it kills scripting
 2026-09-21  40c16be  state: regenerated after the slow-motion route and the mini render proof
 2026-09-21  d022423  slow a clip by retagging fps in ffmpeg then conforming in Resolve (SetSpeed will not lengthen the item); the Mac mini HAS Resolve Studio and renders over ssh, AGENTS.md is stale
@@ -133,24 +136,15 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 2026-09-19  47f8f70  match a grade from a reference photo: color-matcher fit recovered by least squares and baked to a 33-cube, applied on colour node 1 (0.75 strength lands within 4 codes of the reference)
 2026-09-18  3648f86  state: regenerated after the working film chain and the card-offload verification
 2026-09-18  c164096  film chain that works on Osmo footage: solved balance, CDL density in log, Kodak 2383 print last; auto_balance.py converges the cast from 13.2 to 0.9 codes
-2026-09-18  3446ce6  state: regenerated after the spektrafilm install and the rejected-look law
 ```
 
 ### ⚠ UNPUSHED
 
-**5 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
+**6 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
 
 ```
 git push origin master
 ```
-
-### Uncommitted
-
-```
- M STATE.md
-```
-
-*Uncommitted is not learned. Commit at the moment of learning.*
 
 ---
 
