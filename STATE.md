@@ -3,7 +3,7 @@
 
 # resolve — STATE
 
-*Generated 2026-09-22 07:34 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
+*Generated 2026-09-22 07:38 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
 
 ## What is open
 
@@ -133,6 +133,7 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 *From git. The full narrative lives in `docs/journal/`; commit subjects are written as search bait, so `git log --grep` is the index.*
 
 ```
+2026-09-22  015b37e  the mini renders the ride set on Ryan's picks: lighter matched look, brightness as shot, headless after a SIGKILL
 2026-09-22  81623ef  state: four 2026-09-21 ride clips graded at 4K, the mini still wedged, three verdicts open
 2026-09-21  0c33de8  bookmark: the mini rendered none of the four clips, so 'render on the mini' is blocked not closed
 2026-09-21  a0e989d  four Osmo ride clips delivered at 4K, and the offline LUT preview that nearly became a tool is a dead end
@@ -144,25 +145,15 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 2026-09-21  5a3d7c2  state: regenerated after the timelapse verdict and offload verification
 2026-09-21  aeed19c  verdict: Osmo timelapse records 1080p and keeps no source frames; three 2026-09-19 clips verified by sha256 against Ryan's Desktop copy
 2026-09-19  8904a01  STATE regenerated after the rename to resolve
-2026-09-19  5733d17  rename: media-studio → resolve
 ```
 
 ### ⚠ UNPUSHED
 
-**10 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
+**11 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
 
 ```
 git push origin master
 ```
-
-### Uncommitted
-
-```
- M STATE.md
- M tools/remote/resolve_render.py
-```
-
-*Uncommitted is not learned. Commit at the moment of learning.*
 
 ---
 

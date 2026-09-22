@@ -36,7 +36,24 @@ word-splits it (`server receiver mode requires two argument`), which is the alre
 `dvr.scriptapp("Resolve")` returns None forever. `osascript -e 'tell application "DaVinci
 Resolve" to quit'`, then `open -a`, answers in about 8 seconds.
 
-Timing, same 4x Speed Warp job at 1080p: MacBook 482 s, mini **845 s**. The mini is about 1.8x
-slower, so offloading buys a free MacBook, not a faster render.
+Timing depends entirely on the job, and the first figure here was over-generalised:
+
+| job | MacBook | mini | ratio |
+|---|---|---|---|
+| 4x Speed Warp optical flow, 1080p | 482 s | 845 s | 1.75x slower |
+| plain graded 4K render, clip 0002 | 244 s | 262 s | **1.07x slower** |
+| plain graded 4K render, clip 0004 | 226 s | 232 s | **1.03x slower** |
+
+So the mini is only badly behind on **optical-flow retiming**, which is where its 8 GB and
+weaker GPU tell. For an ordinary LUT-and-encode 4K render it is within 7% of the MacBook, and
+offloading is nearly free. Measured 2026-09-21 and 2026-09-22 on the same clips.
+
+**The `pkill` warning below is now contradicted and kept only as caution.** On 2026-09-22 the
+mini's Resolve ignored an AppleEvent quit at a 300 s timeout AND ignored SIGTERM for twelve and
+a half hours at ~750% CPU. `kill -9` finally took it down and **scripting came back completely
+normally on relaunch**. See [[resolve-on-the-mini-wedges-at-700-percent-cpu-and-stops-answering]];
+prefer a graceful quit, but a hard kill is not the disaster this claim first described. Run the
+mini **headless** (`Resolve -nogui`) and the wedge stops happening: with no GUI session there is
+no invisible modal, and `StopRendering` returns clean instead of hanging.
 
 Related: [[the-mac-mini-has-resolve-studio-and-renders-over-ssh]].
