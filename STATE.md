@@ -3,7 +3,7 @@
 
 # resolve — STATE
 
-*Generated 2026-09-22 14:20 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
+*Generated 2026-09-22 14:21 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
 
 ## What is open
 
@@ -144,6 +144,7 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 *From git. The full narrative lives in `docs/journal/`; commit subjects are written as search bait, so `git log --grep` is the index.*
 
 ```
+2026-09-22  4b89b15  state: regenerated after the plugin report and the 80s chrome logo question
 2026-09-22  732fa07  plugin report: counted split from documented, verdicts flattened to a numbered list; bookmarks for the SetLUT .dctl test and one Vonk node on 21.1
 2026-09-22  500b0e6  verdict: an OFX tool id in Fusion is ofx. plus its plugin identifier; the Fusion page is the only scriptable home for effects; 21.1 already ships most of what the pack market sells
 2026-09-22  9bd5c81  research: the Resolve/Fusion plugin ecosystem surveyed — 101 ResolveFX by verified ofx. id, Reactor/Vonk, Gyroflow, purzos, ntsc-rs, film emulators priced, MotionVFX bought by Apple
@@ -155,7 +156,6 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 2026-09-22  015b37e  the mini renders the ride set on Ryan's picks: lighter matched look, brightness as shot, headless after a SIGKILL
 2026-09-22  81623ef  state: four 2026-09-21 ride clips graded at 4K, the mini still wedged, three verdicts open
 2026-09-21  0c33de8  bookmark: the mini rendered none of the four clips, so 'render on the mini' is blocked not closed
-2026-09-21  a0e989d  four Osmo ride clips delivered at 4K, and the offline LUT preview that nearly became a tool is a dead end
 ```
 
 *Remote: `https://github.com/blessdog/resolve.git` — `master` is pushed.*
@@ -163,7 +163,6 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 ### Uncommitted
 
 ```
- M STATE.md
 ?? jobs/film-look-mini/reference-podcast-blue.jpg
 ```
 
