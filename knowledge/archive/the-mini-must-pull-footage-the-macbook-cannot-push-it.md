@@ -1,8 +1,9 @@
 ---
 id: the-mini-must-pull-footage-the-macbook-cannot-push-it
 kind: verdict
+superseded-by: use-the-thunderbolt-cable-to-the-mini-not-wifi
 conflict-key: how-to-move-4k-footage-to-the-mac-mini
-status: live
+status: superseded
 verified-on: 2026-09-21
 supersedes: []
 scope: MacBook (Wi-Fi 802.11ax, 5 GHz ch36 80 MHz, -67 dBm, 144 Mbps tx rate) to Mac mini (gigabit ethernet, 192.168.0.31) on the same subnet; measured with nc, raw python sockets and curl over http
@@ -12,6 +13,11 @@ asked-as:
   - how do I get 4K clips onto the mini for rendering
   - why is the transfer to the mini so slow
 ---
+
+**SUPERSEDED 2026-09-22.** The asymmetry below is real but it is a WI-FI artifact, and the whole
+question was wrong: neither direction should have been on Wi-Fi. The two machines are joined by a
+Thunderbolt cable where push runs at 707 MB/s. See
+[[use-the-thunderbolt-cable-to-the-mini-not-wifi]].
 
 **Whoever opens the TCP connection decides the speed. The mini must PULL; a push from the
 MacBook runs at a quarter of the rate.**
