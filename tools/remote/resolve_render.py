@@ -79,6 +79,20 @@ STILLS = [float(s) for s in flag("--still-at", "").split(",") if s.strip()]
 PROJECT = flag("--project", "remote-render")
 RETIME = "--retime" in sys.argv
 AUDIO = "--audio" in sys.argv
+# A print-stock LUT (Kodak 2383, Fuji 3513) was built to receive CINEON LOG, not display
+# Rec.709. Feeding it display-referred video is the single most common way to make film
+# emulation look wrong, and it is what every matched-cube attempt here was doing.
+# --log puts the timeline AND the output on Rec.709 primaries / Cineon Film Log, so colour
+# management converts the clip to log before the node and the LUT itself does the
+# log -> display step it was designed for.
+LOG = "--log" in sys.argv
+# In LOG space white balance is an OFFSET, not a slope: an offset shifts density, which is
+# exactly what a printer light does, while a slope in log is a per-channel gamma. Measured
+# 2026-09-22: a closed loop correcting balance with slope on a log timeline oscillated to the
+# clamp in two passes (channel means 12/58/95 -> 202/29/0) because the control was wrong.
+OFFSET = [float(x) for x in flag("--offset", "0,0,0").split(",")]
+POWER = float(flag("--power", "1.0"))
+SAT = float(flag("--sat", "1.0"))
 
 if not os.path.exists(CLIP):
     sys.exit(f"no such clip on this host: {CLIP}")
@@ -108,8 +122,10 @@ for k, v in (("timelineFrameRate", FPS), ("timelineResolutionWidth", str(W)),
              ("timelineResolutionHeight", str(H)),
              ("colorScienceMode", "davinciYRGBColorManagedv2"),
              ("separateColorSpaceAndGamma", "1"),
-             ("colorSpaceTimeline", "Rec.709"), ("colorSpaceTimelineGamma", "Gamma 2.4"),
-             ("colorSpaceOutput", "Rec.709"), ("colorSpaceOutputGamma", "Gamma 2.4"),
+             ("colorSpaceTimeline", "Rec.709"),
+             ("colorSpaceTimelineGamma", "Cineon Film Log" if LOG else "Gamma 2.4"),
+             ("colorSpaceOutput", "Rec.709"),
+             ("colorSpaceOutputGamma", "Cineon Film Log" if LOG else "Gamma 2.4"),
              ("colorSpaceOutputToneMapping", "None"), ("colorSpaceOutputGamutMapping", "None")):
     proj.SetSettings({k: v})
 read = proj.GetSettings()
@@ -143,10 +159,12 @@ ti = tl.GetItemListInTrack("video", 1)[0]
 if RETIME:
     ti.SetProperty("RetimeProcess", 3)        # optical flow
     ti.SetProperty("MotionEstimation", 5)     # Speed Warp
-if CDL != [1.0, 1.0, 1.0]:
+if CDL != [1.0, 1.0, 1.0] or POWER != 1.0 or SAT != 1.0 or OFFSET != [0.0, 0.0, 0.0]:
+    # SetCDL runs BEFORE the node's LUT, which is the lab order: grade the log, then print it.
     ok = ti.SetCDL({"NodeIndex": "1", "Slope": f"{CDL[0]} {CDL[1]} {CDL[2]}",
-                    "Offset": "0 0 0", "Power": "1 1 1", "Saturation": "1"})
-    print("cdl slope", CDL, "->", ok)
+                    "Offset": f"{OFFSET[0]} {OFFSET[1]} {OFFSET[2]}", "Power": f"{POWER} {POWER} {POWER}",
+                    "Saturation": f"{SAT}"})
+    print("cdl slope", CDL, "offset", OFFSET, "power", POWER, "sat", SAT, "->", ok)
     if not ok:
         sys.exit("SetCDL refused the balance; the render would be unbalanced")
 if LUT:
