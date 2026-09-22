@@ -3,7 +3,7 @@
 
 # resolve — STATE
 
-*Generated 2026-09-22 08:08 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
+*Generated 2026-09-22 08:30 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
 
 ## What is open
 
@@ -133,6 +133,7 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 *From git. The full narrative lives in `docs/journal/`; commit subjects are written as search bait, so `git log --grep` is the index.*
 
 ```
+2026-09-22  3cdcec7  ride set finished on the mini and the MacBook is clear: 91 GB free, every byte verified onto the external SSD
 2026-09-22  e2fc55a  state: ride set re-rendered on the mini with the lighter look, MacBook cleared to 64 GB free
 2026-09-22  1798a90  the mini is only 3-7% slower than the MacBook on a plain 4K graded render, not 1.8x
 2026-09-22  015b37e  the mini renders the ride set on Ryan's picks: lighter matched look, brightness as shot, headless after a SIGKILL
@@ -144,16 +145,23 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 2026-09-21  d26f1d4  verdict: Resolve reads LUTs only from /Library so SetLUT fails silently on a user-folder LUT and renders come out ungraded; never pkill Resolve, it kills scripting
 2026-09-21  40c16be  state: regenerated after the slow-motion route and the mini render proof
 2026-09-21  d022423  slow a clip by retagging fps in ffmpeg then conforming in Resolve (SetSpeed will not lengthen the item); the Mac mini HAS Resolve Studio and renders over ssh, AGENTS.md is stale
-2026-09-21  5a3d7c2  state: regenerated after the timelapse verdict and offload verification
 ```
 
 ### ⚠ UNPUSHED
 
-**13 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
+**14 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
 
 ```
 git push origin master
 ```
+
+### Uncommitted
+
+```
+ M STATE.md
+```
+
+*Uncommitted is not learned. Commit at the moment of learning.*
 
 ---
 
