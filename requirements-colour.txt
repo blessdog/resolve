@@ -1,0 +1,21 @@
+# The colour-science environment, separate from .venv because these pull opencv and
+# matplotlib and the studio's own venv stays lean.
+#
+# It exists as a FILE because the env silently broke once: the repo was renamed from
+# media-studio to resolve and every shebang in .venv-colour still pointed at the old
+# absolute path, so `pip` reported "bad interpreter" and `import colour` failed. A venv
+# is not portable across a directory rename; the requirements file is what survives.
+#
+#   python3 -m venv .venv-colour && .venv-colour/bin/pip install -r requirements-colour.txt
+#
+# color-matcher  — the reference-photo grade transfer (Reinhard / MKL / hm-mkl-hm) baked
+#                  into a .cube by jobs/film-look-mini/match_reference.py
+# colour-science — reads and APPLIES a .cube offline (read_LUT, LUT3D.apply). PRIOR ART:
+#                  do not hand-roll trilinear interpolation; this handles the full .cube
+#                  spec, domain min/max and tetrahedral interpolation, which is what
+#                  Resolve itself uses for 3D LUTs.
+color-matcher
+colour-science
+opencv-python
+matplotlib
+scipy
