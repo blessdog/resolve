@@ -78,6 +78,7 @@ WINDOW = flag("--window")
 STILLS = [float(s) for s in flag("--still-at", "").split(",") if s.strip()]
 PROJECT = flag("--project", "remote-render")
 RETIME = "--retime" in sys.argv
+AUDIO = "--audio" in sys.argv
 
 if not os.path.exists(CLIP):
     sys.exit(f"no such clip on this host: {CLIP}")
@@ -184,7 +185,7 @@ app.OpenPage("deliver")
 proj.SetCurrentRenderFormatAndCodec("mp4", "H265")
 settings = {"TargetDir": OUT, "CustomName": TAG, "FormatWidth": W, "FormatHeight": H,
             "VideoQuality": int(QUALITY), "EncodingProfile": "Main10",
-            "ExportVideo": True, "ExportAudio": False,
+            "ExportVideo": True, "ExportAudio": AUDIO,
             "ColorSpaceTag": "Rec.709", "GammaTag": "Gamma 2.4"}
 if WINDOW:
     a, b = (float(x) for x in WINDOW.split(","))
