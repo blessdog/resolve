@@ -4,10 +4,10 @@ kind: procedure
 conflict-key: how-to-match-a-grade-from-a-reference-photo
 status: live
 supersedes: []
-verified-on: 2026-09-19
+verified-on: 2026-09-22
 applies-when: Ryan supplies a photo whose colour he likes and wants footage graded to match it
 not-when: the reference is another CLIP in the same project; Resolve's own Shot Match handles that in the colour page with no LUT
-route: .venv-colour/bin/python jobs/film-look-mini/match_reference.py <reference.jpg> <source-frame.png> <out.cube> --method hm-mkl-hm --strength 0.75, then copy the .cube under Resolve's LUT folder film-look/matched/ and apply it with NodeGraph.SetLUT(1, "film-look/matched/<name>.cube")
+route: FIRST render an UNGRADED still of the clip out of Resolve (resolve_render.py --still-at S with no --lut) and use THAT as the source frame, never an ffmpeg decode. Then .venv-colour/bin/python jobs/film-look-mini/match_reference.py <reference.jpg> <resolve-still.jpg> <out.cube> --method <the one whose residual is smallest> --strength 1.0, read the printed affine residual and reject any method above ~2 codes, copy the .cube under Resolve's LUT folder film-look/matched/, RESTART Resolve so it sees the new LUT, and apply with NodeGraph.SetLUT(1, "film-look/matched/<name>.cube")
 sibling: the-osmo-film-chain-balance-then-cdl-in-log-then-a-print-lut
 asked-as:
   - can you match the colour grading from a photo I like
@@ -18,6 +18,39 @@ asked-as:
 
 **Yes, and it needs no plugin. `color-matcher` computes the transfer, this repo bakes the
 fitted transform into a 33^3 .cube, and Resolve applies it on colour node 1.**
+
+**AMENDED 2026-09-22, and the amendment is the whole ballgame: the source frame must come
+OUT OF RESOLVE, not out of ffmpeg.** The .cube is fitted to map source pixels to reference
+pixels, so it is only correct on the value range it was fitted on -- and Resolve's managed
+input transform means the node receives different numbers than ffmpeg's rgb24 decode of the
+same frame. Measured on one frame of clip 0002:
+
+| | R | G | B | p1 | midtone |
+|---|---|---|---|---|---|
+| ffmpeg decode | 55.5 | 75.5 | 99.8 | 20.5 | 62.0 |
+| Resolve still | 80.5 | 98.7 | 120.8 | 47.6 | 86.7 |
+
+Fitted on the ffmpeg frame, the LUT overshot badly in Resolve: target midtone 42, delivered
+71 to 101, with the road blown out and the trees posterised acid yellow. Refitted on the
+Resolve still, the same method landed at RGB 63/49/71 against the reference's 62/49/66 with
+blacks at 1. Same reference, same method, same clip -- only the fitting domain changed.
+
+This is the same mechanism as
+[[applying-a-cube-offline-does-not-predict-what-resolve-renders]], hitting from the other
+direction: there it made a PREDICTION wrong, here it makes the ARTEFACT wrong.
+
+**Choose the method by its printed residual, not by what worked last time.** The residual is
+how far the baked lattice is from the library's own result, and it is reference-dependent:
+
+| reference | mkl | reinhard | hm-mkl-hm |
+|---|---|---|---|
+| warm fashion photo (2026-09-19) | -- | -- | used, worked |
+| dark studio podcast (2026-09-22) | **1.9 codes** | 12.9 | 15.7 |
+
+Above roughly 2 codes the transform is not affine, the tool falls back to per-channel curves,
+and the result shows it -- the 15.7-code bake came out magenta with a yellow building. Anything
+that crushes blacks or is lit very differently from the footage will be non-affine, so a
+crushed-black interior matched onto an outdoor dusk ride wants MKL.
 
 PRIOR ART, searched 2026-09-19 before writing anything: `color-matcher` (hahnec, PyPI 0.6.0)
 implements Reinhard 2001, Pitie's Monge-Kantorovich linear transform, histogram matching and
