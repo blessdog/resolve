@@ -3,7 +3,7 @@
 
 # resolve — STATE
 
-*Generated 2026-09-21 18:35 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
+*Generated 2026-09-21 18:45 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
 
 ## What is open
 
@@ -47,7 +47,7 @@ Every `kind: open` claim in the store. These are PLANS, not specs — `proven: f
 The full index. Query it before choosing any technique — `find-technique.py "<your situation>"` — rather than reading it. Every claim declares the questions that must find it, and `check-retrieval.py` asserts they do.
 
 ```
-KNOWLEDGE — 45 live claims: 45 from this project (/Users/SSDrive/projects/mediaStudio/resolve/knowledge), 0 universal (~/.claude/knowledge/store)
+KNOWLEDGE — 48 live claims: 48 from this project (/Users/SSDrive/projects/mediaStudio/resolve/knowledge), 0 universal (~/.claude/knowledge/store)
 Query before choosing any technique:  python3 ~/.claude/knowledge/bin/find-technique.py "<your situation>"
 
 LAWS — absolute, no exceptions
@@ -59,6 +59,7 @@ PROCEDURES — the routes that are currently believed
   · match-a-reference-photos-grade-by-baking-color-matcher-into-a-cube answers how-to-match-a-grade-from-a-reference-photo   (sibling: the-osmo-film-chain-balance-then-cdl-in-log-then-a-print-lut)
   · osmo-d-log-m-into-resolve-goes-through-the-idt-dctl answers how-to-convert-osmo-action-5-pro-d-log-m-in-resolve   (sibling: none)
   · photos-library-originals-come-down-with-osxphotos answers how-to-get-a-photos-library-video-into-the-studio   (sibling: none)
+  · slow-a-timelapse-by-retagging-fps-in-ffmpeg-then-conforming-in-resolve answers how-to-slow-a-clip-down-in-resolve-by-script   (sibling: none)
   · the-osmo-film-chain-balance-then-cdl-in-log-then-a-print-lut answers how-to-make-osmo-footage-look-cinematic   (sibling: none)
   · utility-dctls-film-chain-in-resolve-matches-its-published-math answers how-to-run-the-utility-dctls-film-pipeline-by-script-in-resolve   (sibling: none)
 
@@ -78,6 +79,7 @@ VERDICTS — measured, and SCOPED; check the scope before reusing
   · resolve-21-1-installer-needs-14-gb-on-the-startup-disk DaVinci_Resolve_Studio_21.1_Mac.dmg ("Install Resolve 21.1.pkg", 11 GB) on macOS; the Mac 
   · resolve-exportlut-bakes-the-node-grade-not-colour-management Resolve Studio 21.1.0, TimelineItem.ExportLUT(EXPORT_LUT_65PTCUBE) on a clip in a davinciY
   · resolve-ntsc-rates-compile-as-non-drop-frame-strings Resolve Studio 21.1.0 through studio.compile (OTIO import); 30000/1001 measured on IMG_088
+  · resolve-only-reads-the-system-lut-folder-and-a-hard-kill-breaks-scripting DaVinci Resolve Studio 21.1.0.14 on the Mac mini (macOS 26.4.1) driven over ssh; SetLUT on
   · resolve-scripting-cannot-set-input-gamma-on-a-still Resolve Studio 21.1.0 on the Mac mini, davinciYRGBColorManagedv2 with separate colour spac
   · resolve-scripting-sets-a-clip-input-only-with-the-split-off Resolve Studio 21.1 on the MacBook, davinciYRGBColorManagedv2, timeline Rec.709 / Linear, 
   · resolve-stoprendering-returns-before-the-render-stops Resolve Studio 21.1.0 on the Mac mini, stopping a Fusion CineFocus render started through 
@@ -85,6 +87,7 @@ VERDICTS — measured, and SCOPED; check the scope before reusing
   · spektrafilm-installs-without-admin-but-its-menus-are-invisible-to-scripting spektrafilm OFX 0.4.7 (free, GPL-3.0) on macOS 27, DaVinci Resolve Studio 21.1, driven fro
   · the-approved-film-look-fails-on-osmo-clip-0004 recipe rich-halation-grain-400 (utility-dctls, 400 grains per pixel) after the D-Log M con
   · the-cinematic-levers-ranked-on-the-osmo-exposure-then-optics-then-tone DJI Osmo Action 5 Pro, 4K, clips 0001 / 0006 / 0014 (detail measurements) and clip DJI_202
+  · the-mac-mini-has-resolve-studio-and-renders-over-ssh Ryans-Mac-mini.local (ssh host `mini`), macOS 26.4.1, M1, 8 GB RAM, 29 GB free of 228 GB, 
   · the-mini-renders-the-story-ir-with-ffmpeg-not-resolve straight-cut timelines (track-1 edits only) rendered from a workspace's story.json; the Ma
   · the-native-resolve-mcp-server-works-over-stdio DaVinci Resolve Studio 21.1.0.14 on this MacBook (macOS 26), external scripting = Local, R
   · the-osmo-wav-leads-its-mp4-audio-by-about-120-ms DJI Osmo Action 5 Pro, two clips shot 2026-09-16 (DJI_20260916114233_0001_D, DJI_202609161
@@ -119,6 +122,9 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 *From git. The full narrative lives in `docs/journal/`; commit subjects are written as search bait, so `git log --grep` is the index.*
 
 ```
+2026-09-21  d26f1d4  verdict: Resolve reads LUTs only from /Library so SetLUT fails silently on a user-folder LUT and renders come out ungraded; never pkill Resolve, it kills scripting
+2026-09-21  40c16be  state: regenerated after the slow-motion route and the mini render proof
+2026-09-21  d022423  slow a clip by retagging fps in ffmpeg then conforming in Resolve (SetSpeed will not lengthen the item); the Mac mini HAS Resolve Studio and renders over ssh, AGENTS.md is stale
 2026-09-21  5a3d7c2  state: regenerated after the timelapse verdict and offload verification
 2026-09-21  aeed19c  verdict: Osmo timelapse records 1080p and keeps no source frames; three 2026-09-19 clips verified by sha256 against Ryan's Desktop copy
 2026-09-19  8904a01  STATE regenerated after the rename to resolve
@@ -128,14 +134,11 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 2026-09-18  3648f86  state: regenerated after the working film chain and the card-offload verification
 2026-09-18  c164096  film chain that works on Osmo footage: solved balance, CDL density in log, Kodak 2383 print last; auto_balance.py converges the cast from 13.2 to 0.9 codes
 2026-09-18  3446ce6  state: regenerated after the spektrafilm install and the rejected-look law
-2026-09-18  98fd3c6  spektrafilm installs with no admin password via OFX_PLUGIN_PATH, but its menus are invisible to scripting; law: when a look is rejected change the TOOL, not the parameter
-2026-09-18  9d9be90  state: regenerated after the cinematic-levers research and the four-look taste on clip 0002
-2026-09-18  fe6085c  research: the cinematic levers ranked for the Osmo (exposure, optics, tone, colour, texture) with the 2026 emulator market priced; Kodak 2383 print holds every highlight and renders in 8 s
 ```
 
 ### ⚠ UNPUSHED
 
-**2 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
+**5 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
 
 ```
 git push origin master
