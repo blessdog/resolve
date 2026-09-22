@@ -3,7 +3,7 @@
 
 # resolve — STATE
 
-*Generated 2026-09-21 18:02 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
+*Generated 2026-09-21 18:35 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
 
 ## What is open
 
@@ -119,6 +119,7 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 *From git. The full narrative lives in `docs/journal/`; commit subjects are written as search bait, so `git log --grep` is the index.*
 
 ```
+2026-09-21  5a3d7c2  state: regenerated after the timelapse verdict and offload verification
 2026-09-21  aeed19c  verdict: Osmo timelapse records 1080p and keeps no source frames; three 2026-09-19 clips verified by sha256 against Ryan's Desktop copy
 2026-09-19  8904a01  STATE regenerated after the rename to resolve
 2026-09-19  5733d17  rename: media-studio → resolve
@@ -130,12 +131,11 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 2026-09-18  98fd3c6  spektrafilm installs with no admin password via OFX_PLUGIN_PATH, but its menus are invisible to scripting; law: when a look is rejected change the TOOL, not the parameter
 2026-09-18  9d9be90  state: regenerated after the cinematic-levers research and the four-look taste on clip 0002
 2026-09-18  fe6085c  research: the cinematic levers ranked for the Osmo (exposure, optics, tone, colour, texture) with the 2026 emulator market priced; Kodak 2383 print holds every highlight and renders in 8 s
-2026-09-18  b6af88a  film-look-mini: grain-free FLC recipes for clean footage, a CineFocus depth-of-field stage, and film_mini.py takes absolute paths (relative clip = silent empty ImportMedia, relative TargetDir = modal render-path dialog)
 ```
 
 ### ⚠ UNPUSHED
 
-**1 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
+**2 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
 
 ```
 git push origin master
