@@ -3,7 +3,7 @@
 
 # resolve — STATE
 
-*Generated 2026-09-22 08:30 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
+*Generated 2026-09-22 08:51 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
 
 ## What is open
 
@@ -95,10 +95,10 @@ VERDICTS — measured, and SCOPED; check the scope before reusing
   · the-approved-film-look-fails-on-osmo-clip-0004 recipe rich-halation-grain-400 (utility-dctls, 400 grains per pixel) after the D-Log M con
   · the-cinematic-levers-ranked-on-the-osmo-exposure-then-optics-then-tone DJI Osmo Action 5 Pro, 4K, clips 0001 / 0006 / 0014 (detail measurements) and clip DJI_202
   · the-mac-mini-has-resolve-studio-and-renders-over-ssh Ryans-Mac-mini.local (ssh host `mini`), macOS 26.4.1, M1, 8 GB RAM, 29 GB free of 228 GB, 
-  · the-mini-must-pull-footage-the-macbook-cannot-push-it MacBook (Wi-Fi 802.11ax, 5 GHz ch36 80 MHz, -67 dBm, 144 Mbps tx rate) to Mac mini (gigabi
   · the-mini-renders-the-story-ir-with-ffmpeg-not-resolve straight-cut timelines (track-1 edits only) rendered from a workspace's story.json; the Ma
   · the-native-resolve-mcp-server-works-over-stdio DaVinci Resolve Studio 21.1.0.14 on this MacBook (macOS 26), external scripting = Local, R
   · the-osmo-wav-leads-its-mp4-audio-by-about-120-ms DJI Osmo Action 5 Pro, two clips shot 2026-09-16 (DJI_20260916114233_0001_D, DJI_202609161
+  · use-the-thunderbolt-cable-to-the-mini-not-wifi MacBook Pro and Mac mini joined by a Thunderbolt cable, bridge0 192.168.2.2 <-> 192.168.2.
 
 REFUTED — already tried, do NOT retry
   ✗ an-rsync-remote-path-with-a-space-arrives-as-two-arguments rsync hands the remote path to the remote login shell as text, the shell word-splits it, and the far
@@ -133,6 +133,7 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 *From git. The full narrative lives in `docs/journal/`; commit subjects are written as search bait, so `git log --grep` is the index.*
 
 ```
+2026-09-22  918034f  the Thunderbolt cable to the mini was there all along and nothing was using it: 229 MB/s over ssh vs 15.6 on Wi-Fi
 2026-09-22  de0b5d7  state: regenerated while the plugin-ecosystem search runs
 2026-09-22  3cdcec7  ride set finished on the mini and the MacBook is clear: 91 GB free, every byte verified onto the external SSD
 2026-09-22  e2fc55a  state: ride set re-rendered on the mini with the lighter look, MacBook cleared to 64 GB free
@@ -144,16 +145,24 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 2026-09-21  fe1d551  read back the project frame rate too: Resolve locks it once a timeline exists and silently dropped 15 of 89 frames
 2026-09-21  b306a05  render 4K graded Osmo clips on either machine: one remote driver with a LUT readback gate, and the mini must PULL footage (15.6 MB/s) not be pushed to (3.7)
 2026-09-21  d26f1d4  verdict: Resolve reads LUTs only from /Library so SetLUT fails silently on a user-folder LUT and renders come out ungraded; never pkill Resolve, it kills scripting
-2026-09-21  40c16be  state: regenerated after the slow-motion route and the mini render proof
 ```
 
 ### ⚠ UNPUSHED
 
-**15 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
+**16 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
 
 ```
 git push origin master
 ```
+
+### Uncommitted
+
+```
+ M STATE.md
+?? docs/research-raw/plugins-2026-09-22/
+```
+
+*Uncommitted is not learned. Commit at the moment of learning.*
 
 ---
 

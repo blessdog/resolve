@@ -51,17 +51,17 @@ MCP server are all Studio-only; free 21.1 silently drops `.py` from the Scripts 
 
 ## 2. What Resolve 21.1 already gives us — before installing anything
 
-Measured on this machine unless marked otherwise.
+Counted on this machine: the template numbers, the 101 ResolveFX ids, and the presence of `krokodove.plugin` / `ograf.plugin` in the bundle. Rows marked **documented** come from the Resolve 21 New Features Guide and have not yet been placed in a comp here.
 
 | Already here | Count / detail | Reaches the pipeline via |
 |---|---|---|
 | **ResolveFX** | **101** OFX tools by verified ID: Glow, Halation, Film Look Creator, Film Grain, Film Damage, Analog Damage, JPEG Damage, Scanlines, Lens Flare, Light Rays, Aperture Diffraction, AI Stylize, AI Cinematic Haze, AI CineFocus, AI Depth Map, AI Relight, AI UltraSharpen, AI Motion Deblur, Pencil Sketch, Watercolor, Camera Shake, Motion Trails, Stop Motion, Video Collage, Warper, DCTL, Surface Tracker, Noise Reduction … | `comp.AddTool("ofx.com.blackmagicdesign.resolvefx.<Name>")` — already how `dctl_film_mini.py` works |
 | **Edit-page templates** (`Templates.drfx`, unzipped and counted) | **134 titles, 67 transitions, 29 effects, 44 generators** (21 stinger transitions). Transitions include Camera Shake, Crash Zoom, Zoom In, Glitch, Block Glitch, RGB Splitter, Stretch Blur, Film Strip | `InsertFusionTitleIntoTimeline`, `AddTransition` |
 | **Fusion bins** | Styled Text: 3D Follower, Flip/Jiggle/Rotate/Stretch Follower, Scramble Modifier, Odometer, Circle/Path Layout. Tools: Advanced Camera Shake. 523 lens-flare files, 289 particle files, 354 shader files | `comp.Paste` |
-| **Krokodove** (was a Reactor atom) | built into 21.0, +25 tools in 21.1 (`krokodove.plugin` verified in the bundle): Duplicate 3D, Kaleidoscope, Fragments, Grow, Seamless Loop, Sort, Painterly, Shapes, Text modifiers **Juggle / Write (typewriter) / From File / Formula**, **Beat** modifier | `comp.AddTool` |
-| **Fairlight Animator** modifier (21; 21.1 adds high/low-pass) | any Fusion parameter driven by timeline audio | modifier set via comp |
-| **MultiText** (20; CSV import in 21) | many styled layers in one tool — data-driven lower thirds | comp |
-| **Lottie / OGraf import** + `OGrafLoader` (21) | the whole LottieFiles / Bodymovin ecosystem as alpha clips | `ImportMedia` (inferred) |
+| **Krokodove** (was a Reactor atom) — tool list **documented** | built into 21.0, +25 tools in 21.1 (`krokodove.plugin` verified in the bundle): Duplicate 3D, Kaleidoscope, Fragments, Grow, Seamless Loop, Sort, Painterly, Shapes, Text modifiers **Juggle / Write (typewriter) / From File / Formula**, **Beat** modifier | `comp.AddTool` |
+| **Fairlight Animator** modifier (21; 21.1 adds high/low-pass) — **documented** | any Fusion parameter driven by timeline audio | modifier set via comp |
+| **MultiText** (20; CSV import in 21) — **documented** | many styled layers in one tool — data-driven lower thirds | comp |
+| **Lottie / OGraf import** + `OGrafLoader` (21) — plugin present, import **documented** | the whole LottieFiles / Bodymovin ecosystem as alpha clips | `ImportMedia` (inferred) |
 | **Film Look Creator, Color Slice, Chroma Warp, Magic Mask 2, Depth Map 2** | colour-page tools; FLC already measured in the store | `.drx` only on Color page; FLC also as `ofx.…FilmLook` in Fusion |
 | **Scripting 21.1** | `AddTransition`, Fades/Speed get/set, presets, Media Pool transcription with speaker timing, DCTL validate, native MCP server | already in use |
 | **Grade library** (`grades/film-look/`) | thatcher utility-dctls + dwg-transforms (MIT/open), Melara prints, DJI cubes, Cullen Kelly 2383, spektrafilm OFX | `dctl_film_mini.py` |
@@ -163,10 +163,14 @@ not change any project code.
 
 ---
 
-## 8. Verdicts that are Ryan's — money, and one architecture call
+## 8. Verdicts that are Ryan's — money
 
-Each is a genuine either/or: picking one means the other is not bought.
+Answer with a number. Film emulation (1–3) is one purse: buying one means the
+others are not bought. Templates (4–5) is a second purse, same rule. Neat Video is
+not on this list because the open denoise bookmark has to render first.
 
-1. **Film emulation, paid or not.** (a) Stay free — Film Look Creator + print LUTs + spektrafilm once its parameters are read back, + OpenDRT on the comparison sheet. (b) FilmConvert Nitrate, $119. (c) Filmbox Looks, $199, after its 14-day trial. My read: (a) until the open comparison sheet has been looked at; the store already says the print LUT beat FLC on the 126 s frame and exposure discipline beats all of them.
-2. **A template subscription, or none.** (a) None — 134 stock titles plus the Reactor atoms plus our own compiler. (b) Envato Elements Core at $16.50/mo for a month, download a shortlist, cancel. My read: (b) for one month, because the compiler's look pass would benefit from studying twenty polished `.setting` files, and one month is $16.50.
-3. **Neat Video Pro for Resolve, $159.90, or Studio's own NR.** Only decidable after the open bookmark `denoise-high-iso-osmo-footage…` renders both on clip 0004. Not yet.
+1. **Film emulation: stay free** — Film Look Creator + print LUTs + spektrafilm once its parameters are read back + OpenDRT on the comparison sheet. *My recommendation*, because the store already shows the print LUT beating FLC on the 126 s frame and exposure discipline beating all of them.
+2. **FilmConvert Nitrate, $119 perpetual.**
+3. **Filmbox Looks, 14-day trial, then $199 perpetual.**
+4. **Envato Elements Core for one month, $16.50** — download a shortlist of polished `.setting` files for the compiler's look pass, then cancel. *My recommendation.*
+5. **No template subscription** — 134 stock titles + Reactor atoms + our compiler.
