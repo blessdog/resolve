@@ -3,7 +3,7 @@
 
 # resolve — STATE
 
-*Generated 2026-09-19 16:28 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
+*Generated 2026-09-21 18:02 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
 
 ## What is open
 
@@ -47,7 +47,7 @@ Every `kind: open` claim in the store. These are PLANS, not specs — `proven: f
 The full index. Query it before choosing any technique — `find-technique.py "<your situation>"` — rather than reading it. Every claim declares the questions that must find it, and `check-retrieval.py` asserts they do.
 
 ```
-KNOWLEDGE — 44 live claims: 44 from this project (/Users/SSDrive/projects/mediaStudio/resolve/knowledge), 0 universal (~/.claude/knowledge/store)
+KNOWLEDGE — 45 live claims: 45 from this project (/Users/SSDrive/projects/mediaStudio/resolve/knowledge), 0 universal (~/.claude/knowledge/store)
 Query before choosing any technique:  python3 ~/.claude/knowledge/bin/find-technique.py "<your situation>"
 
 LAWS — absolute, no exceptions
@@ -73,6 +73,7 @@ VERDICTS — measured, and SCOPED; check the scope before reusing
   · osmo-auto-exposure-picks-fast-shutters-and-high-iso-lock-the-shutter DJI Osmo Action 5 Pro on auto exposure, three clips read through the pattern field Dvtm_ac
   · osmo-clip-0004-was-shot-at-about-iso-3200 DJI Osmo Action 5 Pro (firmware field 10.00.16.13), auto exposure, D-Log M, 4K 29.97, clip
   · osmo-dusk-clip-0014-is-4k-pixels-with-less-than-1080p-detail DJI Osmo Action 5 Pro clip DJI_20260917182112_0014_D (dusk bike ride, 18:21 on 2026-09-17,
+  · osmo-timelapse-mode-records-1080p-and-keeps-no-source-frames DJI Osmo Action 5 Pro in timelapse mode, clips DJI_20260919190029_0002_D and DJI_202609191
   · render-4k-footage-at-4k renders made for Ryan to watch from 4K camera footage (DJI Osmo Action 5 Pro, 3840x2160), 
   · resolve-21-1-installer-needs-14-gb-on-the-startup-disk DaVinci_Resolve_Studio_21.1_Mac.dmg ("Install Resolve 21.1.pkg", 11 GB) on macOS; the Mac 
   · resolve-exportlut-bakes-the-node-grade-not-colour-management Resolve Studio 21.1.0, TimelineItem.ExportLUT(EXPORT_LUT_65PTCUBE) on a clip in a davinciY
@@ -118,6 +119,8 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 *From git. The full narrative lives in `docs/journal/`; commit subjects are written as search bait, so `git log --grep` is the index.*
 
 ```
+2026-09-21  aeed19c  verdict: Osmo timelapse records 1080p and keeps no source frames; three 2026-09-19 clips verified by sha256 against Ryan's Desktop copy
+2026-09-19  8904a01  STATE regenerated after the rename to resolve
 2026-09-19  5733d17  rename: media-studio → resolve
 2026-09-19  6f2650a  state: regenerated after the reference-photo colour match
 2026-09-19  47f8f70  match a grade from a reference photo: color-matcher fit recovered by least squares and baked to a 33-cube, applied on colour node 1 (0.75 strength lands within 4 codes of the reference)
@@ -128,11 +131,15 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 2026-09-18  9d9be90  state: regenerated after the cinematic-levers research and the four-look taste on clip 0002
 2026-09-18  fe6085c  research: the cinematic levers ranked for the Osmo (exposure, optics, tone, colour, texture) with the 2026 emulator market priced; Kodak 2383 print holds every highlight and renders in 8 s
 2026-09-18  b6af88a  film-look-mini: grain-free FLC recipes for clean footage, a CineFocus depth-of-field stage, and film_mini.py takes absolute paths (relative clip = silent empty ImportMedia, relative TargetDir = modal render-path dialog)
-2026-09-18  4b86193  state: regenerated after the ND and locked-shutter 4K detail verdict
-2026-09-18  156242d  verdict: ND plus a locked 1/50 shutter gives the Osmo real 4K detail on a still frame (sharpness 183, 1080p round trip 2.21 codes); moving frames blur at 1/50 as expected
 ```
 
-*Remote: `https://github.com/blessdog/resolve.git` — `master` is pushed.*
+### ⚠ UNPUSHED
+
+**1 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
+
+```
+git push origin master
+```
 
 ### Uncommitted
 
