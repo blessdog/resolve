@@ -3,7 +3,7 @@
 
 # resolve — STATE
 
-*Generated 2026-09-22 08:51 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
+*Generated 2026-09-22 14:20 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
 
 ## What is open
 
@@ -31,6 +31,9 @@ Every `kind: open` claim in the store. These are PLANS, not specs — `proven: f
 ? fold-the-d-log-m-highlights-ahead-of-film-look-c   (2026-09-17)
     Fold the D-Log M highlights ahead of Film Look Creator so a dusk sky holds the way DJI's LUT holds it
     why: Measured 2026-09-17 on Osmo clip 0014 at 750 s: FLC after the Thatcher D-Log M DCTL puts 13 to 22% of pi
+? install-reactor-standalone-and-render-one-vonk-u   (2026-09-22)
+    Install Reactor Standalone and render one Vonk Ultra vJSONFromFile node on Resolve 21.1
+    why: Vonk is the data-driven Fusion route (Python writes beats.json, Fusion reads it at render time) and the 
 ? obs-camera-isolates-in-movies-iso-are-an-untouch   (2026-09-07)
     OBS camera isolates in movies/iso are an untouched multicam B-roll lane
     why: Six *-cam.mp4 isolates (Sept 5 and 7 sessions, one 15GB with no matching program recording) exist beside
@@ -45,6 +48,9 @@ Every `kind: open` claim in the store. These are PLANS, not specs — `proven: f
 ? sync-the-osmo-wav-inside-resolve-with-autosyncau   (2026-09-16)
     Sync the Osmo WAV inside Resolve with AutoSyncAudio
     why: The Osmo's WAV leads its MP4 audio by 116-121 ms (clips 0001 and 0004); today the fix is a hand-measured
+? test-graph-setlut-nodeindex-path-with-a-dctl-pat   (2026-09-22)
+    Test Graph.SetLUT(nodeIndex, path) with a .dctl path on a colour node
+    why: the only route that would put a DCTL on the Color page by script is unverified; .cube via SetLUT is doc-
 ```
 
 ## What this project knows
@@ -52,7 +58,7 @@ Every `kind: open` claim in the store. These are PLANS, not specs — `proven: f
 The full index. Query it before choosing any technique — `find-technique.py "<your situation>"` — rather than reading it. Every claim declares the questions that must find it, and `check-retrieval.py` asserts they do.
 
 ```
-KNOWLEDGE — 54 live claims: 54 from this project (/Users/SSDrive/projects/mediaStudio/resolve/knowledge), 0 universal (~/.claude/knowledge/store)
+KNOWLEDGE — 59 live claims: 59 from this project (/Users/SSDrive/projects/mediaStudio/resolve/knowledge), 0 universal (~/.claude/knowledge/store)
 Query before choosing any technique:  python3 ~/.claude/knowledge/bin/find-technique.py "<your situation>"
 
 LAWS — absolute, no exceptions
@@ -74,6 +80,7 @@ VERDICTS — measured, and SCOPED; check the scope before reusing
   · a-reference-matched-lut-already-carries-the-white-balance Osmo Action 5 Pro dusk footage in Rec.709 (not D-Log M), graded with match-fashion-hm-mkl-
   · a-resolve-project-locks-its-frame-rate-once-it-has-a-timeline DaVinci Resolve Studio 21.1.0 driven by script; SetSettings({"timelineFrameRate": ...}) on
   · a-yrgb-project-timeline-colour-space-is-one-combined-key DaVinci Resolve Studio 21.1.0 on macOS, colorScienceMode davinciYRGB with the default sepa
+  · an-ofx-tool-id-in-fusion-is-ofx-dot-plus-its-plugin-identifier DaVinci Resolve Studio 21.1.0 on this MacBook (Apple Silicon); the 101 ofx. tools in a sto
   · film-look-creator-on-osmo-clip-0014-blows-the-sky-and-breaks-on-a-dwg-timeline DJI Osmo Action 5 Pro clip DJI_20260917182112_0014_D (25 min bike ride at dusk, 4K 29.97 D
   · gpcr-interface-faces-are-90-degrees-apart Class A GPCR heteromers assembled from real coordinates, specifically the A2AR-D2R heterot
   · iphone-camera-app-prores-log-is-apple-log-not-log-2 iPhone 17 Pro, iOS 26.6.2, built-in Camera app with ProRes Log (ProRes 422 HQ 1080p); Reso
@@ -83,6 +90,7 @@ VERDICTS — measured, and SCOPED; check the scope before reusing
   · osmo-dusk-clip-0014-is-4k-pixels-with-less-than-1080p-detail DJI Osmo Action 5 Pro clip DJI_20260917182112_0014_D (dusk bike ride, 18:21 on 2026-09-17,
   · osmo-timelapse-mode-records-1080p-and-keeps-no-source-frames DJI Osmo Action 5 Pro in timelapse mode, clips DJI_20260919190029_0002_D and DJI_202609191
   · render-4k-footage-at-4k renders made for Ryan to watch from 4K camera footage (DJI Osmo Action 5 Pro, 3840x2160), 
+  · resolve-21-1-already-ships-most-of-what-the-pack-market-sells the stock Resolve Studio 21.1.0 install on this MacBook; counts from unzipping Resolve.app
   · resolve-21-1-installer-needs-14-gb-on-the-startup-disk DaVinci_Resolve_Studio_21.1_Mac.dmg ("Install Resolve 21.1.pkg", 11 GB) on macOS; the Mac 
   · resolve-exportlut-bakes-the-node-grade-not-colour-management Resolve Studio 21.1.0, TimelineItem.ExportLUT(EXPORT_LUT_65PTCUBE) on a clip in a davinciY
   · resolve-ntsc-rates-compile-as-non-drop-frame-strings Resolve Studio 21.1.0 through studio.compile (OTIO import); 30000/1001 measured on IMG_088
@@ -94,6 +102,7 @@ VERDICTS — measured, and SCOPED; check the scope before reusing
   · spektrafilm-installs-without-admin-but-its-menus-are-invisible-to-scripting spektrafilm OFX 0.4.7 (free, GPL-3.0) on macOS 27, DaVinci Resolve Studio 21.1, driven fro
   · the-approved-film-look-fails-on-osmo-clip-0004 recipe rich-halation-grain-400 (utility-dctls, 400 grains per pixel) after the D-Log M con
   · the-cinematic-levers-ranked-on-the-osmo-exposure-then-optics-then-tone DJI Osmo Action 5 Pro, 4K, clips 0001 / 0006 / 0014 (detail measurements) and clip DJI_202
+  · the-fusion-page-is-the-only-scriptable-home-for-effects-and-animation the DaVinciResolveScript.pyi shipped with Resolve 21.1.0 (dated 2026-09-07) and its CHANGE
   · the-mac-mini-has-resolve-studio-and-renders-over-ssh Ryans-Mac-mini.local (ssh host `mini`), macOS 26.4.1, M1, 8 GB RAM, 29 GB free of 228 GB, 
   · the-mini-renders-the-story-ir-with-ffmpeg-not-resolve straight-cut timelines (track-1 edits only) rendered from a workspace's story.json; the Ma
   · the-native-resolve-mcp-server-works-over-stdio DaVinci Resolve Studio 21.1.0.14 on this MacBook (macOS 26), external scripting = Local, R
@@ -113,11 +122,13 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
   ? edit-ir-find-does-not-work-on-a-multi-recording- Why it matters: moments.spans_from_ir raises 'need asset_id' when track 1 references more 
   ? every-ingest-and-build-tool-should-write-sha256- Why it matters: measured 2026-09-09 on summer-reel: after reconforming three clips in plac
   ? fold-the-d-log-m-highlights-ahead-of-film-look-c Why it matters: Measured 2026-09-17 on Osmo clip 0014 at 750 s: FLC after the Thatcher D-L
+  ? install-reactor-standalone-and-render-one-vonk-u Why it matters: Vonk is the data-driven Fusion route (Python writes beats.json, Fusion rea
   ? obs-camera-isolates-in-movies-iso-are-an-untouch Why it matters: Six -cam.mp4 isolates (Sept 5 and 7 sessions, one 15GB with no matching pr
   ? render-clip-0002-on-the-mac-mini-to-close-ryan-s Why it matters: Ryan said it twice (2026-09-21) and the mini has rendered ZERO of the four
   ? reshoot-the-osmo-test-with-nd-filters-arriving-2 Why it matters: the first Osmo clip clipped the sky in camera: 1.9 to 3.2% of pixels at th
   ? resolve-on-the-mini-wedges-at-700-percent-cpu-and-stops-answering Resolve Studio 21.1.0 on the Mac mini wedged at ~700% CPU for two hours after a scripted
   ? sync-the-osmo-wav-inside-resolve-with-autosyncau Why it matters: The Osmo's WAV leads its MP4 audio by 116-121 ms (clips 0001 and 0004); to
+  ? test-graph-setlut-nodeindex-path-with-a-dctl-pat Why it matters: the only route that would put a DCTL on the Color page by script is unveri
 ```
 
 ## Where the work stands
@@ -133,6 +144,9 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 *From git. The full narrative lives in `docs/journal/`; commit subjects are written as search bait, so `git log --grep` is the index.*
 
 ```
+2026-09-22  732fa07  plugin report: counted split from documented, verdicts flattened to a numbered list; bookmarks for the SetLUT .dctl test and one Vonk node on 21.1
+2026-09-22  500b0e6  verdict: an OFX tool id in Fusion is ofx. plus its plugin identifier; the Fusion page is the only scriptable home for effects; 21.1 already ships most of what the pack market sells
+2026-09-22  9bd5c81  research: the Resolve/Fusion plugin ecosystem surveyed — 101 ResolveFX by verified ofx. id, Reactor/Vonk, Gyroflow, purzos, ntsc-rs, film emulators priced, MotionVFX bought by Apple
 2026-09-22  918034f  the Thunderbolt cable to the mini was there all along and nothing was using it: 229 MB/s over ssh vs 15.6 on Wi-Fi
 2026-09-22  de0b5d7  state: regenerated while the plugin-ecosystem search runs
 2026-09-22  3cdcec7  ride set finished on the mini and the MacBook is clear: 91 GB free, every byte verified onto the external SSD
@@ -142,24 +156,15 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 2026-09-22  81623ef  state: four 2026-09-21 ride clips graded at 4K, the mini still wedged, three verdicts open
 2026-09-21  0c33de8  bookmark: the mini rendered none of the four clips, so 'render on the mini' is blocked not closed
 2026-09-21  a0e989d  four Osmo ride clips delivered at 4K, and the offline LUT preview that nearly became a tool is a dead end
-2026-09-21  fe1d551  read back the project frame rate too: Resolve locks it once a timeline exists and silently dropped 15 of 89 frames
-2026-09-21  b306a05  render 4K graded Osmo clips on either machine: one remote driver with a LUT readback gate, and the mini must PULL footage (15.6 MB/s) not be pushed to (3.7)
-2026-09-21  d26f1d4  verdict: Resolve reads LUTs only from /Library so SetLUT fails silently on a user-folder LUT and renders come out ungraded; never pkill Resolve, it kills scripting
 ```
 
-### ⚠ UNPUSHED
-
-**16 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
-
-```
-git push origin master
-```
+*Remote: `https://github.com/blessdog/resolve.git` — `master` is pushed.*
 
 ### Uncommitted
 
 ```
  M STATE.md
-?? docs/research-raw/plugins-2026-09-22/
+?? jobs/film-look-mini/reference-podcast-blue.jpg
 ```
 
 *Uncommitted is not learned. Commit at the moment of learning.*
