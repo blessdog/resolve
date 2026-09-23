@@ -3,7 +3,7 @@
 
 # resolve — STATE
 
-*Generated 2026-09-22 14:57 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
+*Generated 2026-09-23 08:59 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
 
 ## What is open
 
@@ -44,7 +44,7 @@ Every `kind: open` claim in the store. These are PLANS, not specs — `proven: f
     Reshoot the Osmo test with ND filters (arriving 2026-09-17), 24p at 1/48
     why: the first Osmo clip clipped the sky in camera: 1.9 to 3.2% of pixels at the maximum code in the 60 s and
 ? resolve-on-the-mini-wedges-at-700-percent-cpu-and-stops-answering   (2026-09-21)
-    **Resolve Studio 21.1.0 on the Mac mini wedged at ~700% CPU for two hours after a scripted
+    **Resolve Studio 21.1.0 on the Mac mini does not idle. Twice now it has sat at ~700-750% CPU
 ? sync-the-osmo-wav-inside-resolve-with-autosyncau   (2026-09-16)
     Sync the Osmo WAV inside Resolve with AutoSyncAudio
     why: The Osmo's WAV leads its MP4 audio by 116-121 ms (clips 0001 and 0004); today the fix is a hand-measured
@@ -127,7 +127,7 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
   ? obs-camera-isolates-in-movies-iso-are-an-untouch Why it matters: Six -cam.mp4 isolates (Sept 5 and 7 sessions, one 15GB with no matching pr
   ? render-clip-0002-on-the-mac-mini-to-close-ryan-s Why it matters: Ryan said it twice (2026-09-21) and the mini has rendered ZERO of the four
   ? reshoot-the-osmo-test-with-nd-filters-arriving-2 Why it matters: the first Osmo clip clipped the sky in camera: 1.9 to 3.2% of pixels at th
-  ? resolve-on-the-mini-wedges-at-700-percent-cpu-and-stops-answering Resolve Studio 21.1.0 on the Mac mini wedged at ~700% CPU for two hours after a scripted
+  ? resolve-on-the-mini-wedges-at-700-percent-cpu-and-stops-answering Resolve Studio 21.1.0 on the Mac mini does not idle. Twice now it has sat at ~700-750% CPU
   ? sync-the-osmo-wav-inside-resolve-with-autosyncau Why it matters: The Osmo's WAV leads its MP4 audio by 116-121 ms (clips 0001 and 0004); to
   ? test-graph-setlut-nodeindex-path-with-a-dctl-pat Why it matters: the only route that would put a DCTL on the Color page by script is unveri
 ```
@@ -145,6 +145,7 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 *From git. The full narrative lives in `docs/journal/`; commit subjects are written as search bait, so `git log --grep` is the index.*
 
 ```
+2026-09-23  b3d9f86  Resolve on the mini does not idle: 17h44m at 711% CPU on an 8 GB machine Ryan was using
 2026-09-22  8f5faf9  the broadcast film look: print stock needs Cineon log in and a printer-light balance in front of it
 2026-09-22  f787a6b  the reference-match LUT must be fitted on a frame that came OUT of Resolve, not out of ffmpeg
 2026-09-22  762e9f3  new reference: three frames from one podcast show, and MKL is the only method whose bake can be trusted on it
@@ -156,12 +157,11 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 2026-09-22  de0b5d7  state: regenerated while the plugin-ecosystem search runs
 2026-09-22  3cdcec7  ride set finished on the mini and the MacBook is clear: 91 GB free, every byte verified onto the external SSD
 2026-09-22  e2fc55a  state: ride set re-rendered on the mini with the lighter look, MacBook cleared to 64 GB free
-2026-09-22  1798a90  the mini is only 3-7% slower than the MacBook on a plain 4K graded render, not 1.8x
 ```
 
 ### ⚠ UNPUSHED
 
-**3 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
+**4 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
 
 ```
 git push origin master
