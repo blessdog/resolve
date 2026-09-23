@@ -3,7 +3,7 @@
 
 # resolve — STATE
 
-*Generated 2026-09-22 14:46 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
+*Generated 2026-09-22 14:57 from git, the knowledge store, and this project's own status script. Nothing here is typed by hand, so nothing here can be stale.*
 
 ## What is open
 
@@ -58,7 +58,7 @@ Every `kind: open` claim in the store. These are PLANS, not specs — `proven: f
 The full index. Query it before choosing any technique — `find-technique.py "<your situation>"` — rather than reading it. Every claim declares the questions that must find it, and `check-retrieval.py` asserts they do.
 
 ```
-KNOWLEDGE — 59 live claims: 59 from this project (/Users/SSDrive/projects/mediaStudio/resolve/knowledge), 0 universal (~/.claude/knowledge/store)
+KNOWLEDGE — 60 live claims: 60 from this project (/Users/SSDrive/projects/mediaStudio/resolve/knowledge), 0 universal (~/.claude/knowledge/store)
 Query before choosing any technique:  python3 ~/.claude/knowledge/bin/find-technique.py "<your situation>"
 
 LAWS — absolute, no exceptions
@@ -66,6 +66,7 @@ LAWS — absolute, no exceptions
   · i-kept-tuning-film-look-creator-after-it-had-already-been-rejected: Ryan, 2026-09-18, on three rounds of Film Look Creator variants:
 
 PROCEDURES — the routes that are currently believed
+  · a-print-stock-lut-needs-log-in-and-a-balance-in-front-of-it answers how-to-get-a-broadcast-film-look-on-rec709-footage   (sibling: match-a-reference-photos-grade-by-baking-color-matcher-into-a-cube)
   · film-look-creator-renders-on-the-mini-through-a-fusion-comp answers how-to-apply-film-look-creator-by-script   (sibling: none)
   · match-a-reference-photos-grade-by-baking-color-matcher-into-a-cube answers how-to-match-a-grade-from-a-reference-photo   (sibling: the-osmo-film-chain-balance-then-cdl-in-log-then-a-print-lut)
   · osmo-d-log-m-into-resolve-goes-through-the-idt-dctl answers how-to-convert-osmo-action-5-pro-d-log-m-in-resolve   (sibling: none)
@@ -144,6 +145,7 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 *From git. The full narrative lives in `docs/journal/`; commit subjects are written as search bait, so `git log --grep` is the index.*
 
 ```
+2026-09-22  8f5faf9  the broadcast film look: print stock needs Cineon log in and a printer-light balance in front of it
 2026-09-22  f787a6b  the reference-match LUT must be fitted on a frame that came OUT of Resolve, not out of ffmpeg
 2026-09-22  762e9f3  new reference: three frames from one podcast show, and MKL is the only method whose bake can be trusted on it
 2026-09-22  4b89b15  state: regenerated after the plugin report and the 80s chrome logo question
@@ -155,12 +157,11 @@ OPEN — plans, NOT specs. proven: false. Do not build against these.
 2026-09-22  3cdcec7  ride set finished on the mini and the MacBook is clear: 91 GB free, every byte verified onto the external SSD
 2026-09-22  e2fc55a  state: ride set re-rendered on the mini with the lighter look, MacBook cleared to 64 GB free
 2026-09-22  1798a90  the mini is only 3-7% slower than the MacBook on a plain 4K graded render, not 1.8x
-2026-09-22  015b37e  the mini renders the ride set on Ryan's picks: lighter matched look, brightness as shot, headless after a SIGKILL
 ```
 
 ### ⚠ UNPUSHED
 
-**2 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
+**3 commit(s) ahead of `origin/master`.** Committed is not the same as safe — a commit that has not left this machine has the durability of the disk it is on.
 
 ```
 git push origin master

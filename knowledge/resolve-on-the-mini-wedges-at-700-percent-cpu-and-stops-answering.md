@@ -12,9 +12,17 @@ asked-as:
   - the mac mini stopped answering scripting mid-session
 ---
 
-**Resolve Studio 21.1.0 on the Mac mini wedged at ~700% CPU for two hours after a scripted
-render and stopped answering both `dvr.scriptapp("Resolve")` and AppleEvents. Recovery is
-NOT established.**
+**Resolve Studio 21.1.0 on the Mac mini does not idle. Twice now it has sat at ~700-750% CPU
+indefinitely after a render batch and stopped answering both `dvr.scriptapp("Resolve")` and
+AppleEvents. Treat its lifetime as the lifetime of the JOB and quit it when the job ends.**
+
+Second occurrence 2026-09-23: left running headless after the print-stock samples, found
+**17 h 44 m later at 711% CPU** holding 4.51 GB of an 8 GB machine Ryan was working on, with
+memory at 7.07/8.00 GB and 1.10 GB of swap. Ryan noticed it, not me. `kill -9` cleared it and
+memory went straight back to 72% free.
+
+**The mitigation is `jobs/film-look-mini/mini_session.sh`**: start headless, run one job, quit
+on EXIT via a trap. Never leave Resolve up on that box between batches.
 
 Measured 2026-09-21. It had rendered correctly at 18:59 (the graded Speed Warp job, LUT
 readback True). By 20:15 the same process, up 1 h 43, sat at 694-720% CPU holding
